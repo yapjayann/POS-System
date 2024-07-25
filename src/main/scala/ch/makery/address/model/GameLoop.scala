@@ -4,4 +4,5 @@ import scalafx.animation.AnimationTimer
 
 class GameLoop (gameModel: GameModel) {
 
+  val timer
 }
