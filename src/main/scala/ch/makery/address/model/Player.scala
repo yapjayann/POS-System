@@ -17,5 +17,6 @@ class Player (val name: String) {
   def updateHighScore(): Unit = {
     if (currentScore > highScore) {
       highScore = currentScore
+    }
   }
 }
