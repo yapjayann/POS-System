@@ -7,16 +7,29 @@ import scalafxml.core.{NoDependencyResolver, FXMLView, FXMLLoader}
 import javafx.{scene => jfxs}
 
 object MainApp extends JFXApp {
-  // transform path of RootLayout.fxml to URI for resource location.
-
   val rootResource = getClass.getResource("view/HomePage.fxml")
   val loader = new FXMLLoader(rootResource, NoDependencyResolver)
   loader.load();
   val roots = loader.getRoot[jfxs.layout.AnchorPane]
   stage = new PrimaryStage {
     title = "Dinosaur game"
-    scene = new Scene {
+    scene = new Scene{
       root = roots
     }
   }
+
+  /**def showHowToPlay(): Unit = {
+    val resource = getClass.getResource("view/HowToPlay.fxml")
+    val loader = new FXMLLoader(resource, NoDependencyResolver)
+    loader.load();
+    val roots = loader.getRoot[jfxs.layout.AnchorPane]
+  }
+
+  def showGamePage(): Unit = {
+    val resource = getClass.getResource("view/GamePage.fxml")
+    val loader = new FXMLLoader(resource, NoDependencyResolver)
+    loader.load();
+    val roots = loader.getRoot[jfxs.layout.AnchorPane]
+  }
+**/
 }
