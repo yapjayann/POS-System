@@ -5,6 +5,10 @@ import scalafx.scene.Scene
 import scalafx.Includes._
 import scalafxml.core.{NoDependencyResolver, FXMLView, FXMLLoader}
 import javafx.{scene => jfxs}
+import scalafx.scene.canvas.Canvas
+import scalafx.scene.paint.Color
+import scalafx.animation.AnimationTimer
+//import the dino, cacti, etc
 
 object MainApp extends JFXApp {
   val rootResource = getClass.getResource("view/HomePage.fxml")

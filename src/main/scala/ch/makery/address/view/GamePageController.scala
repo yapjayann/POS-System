@@ -1,5 +1,6 @@
 package ch.makery.address.view
 import scalafx.animation.AnimationTimer //for refresh rate
+import scalafx.scene.input.KeyCode
 
 
 //class GamePageController {
