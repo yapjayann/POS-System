@@ -1,15 +1,24 @@
 package ch.makery.address.view
 import ch.makery.address.MainApp
-import scalafx.animation.AnimationTimer //for refresh rate
+import scalafx.animation.AnimationTimer
 import scalafx.scene.input.KeyCode
 import scalafx.stage.Stage
+import scalafx.Includes._
+import scalafxml.core.macros.sfxml
+import scalafx.stage.Stage
+import scalafx.event.ActionEvent
+import scalafx.scene.control.Button
 
-//class GamePageController {
 
+@sfxml
+class GamePageController (private val backButton: Button){
+  def getHome(event: ActionEvent): Unit = {
+    MainApp.showHomePage()
+  }
 
  // private def checkGameOver(): Unit ={
    // if (dinoDead){
       //stop game loop
    // }
  // }
-//}
+}

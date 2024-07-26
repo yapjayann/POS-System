@@ -6,23 +6,23 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.makery.address.view.HowToPlayController">
+<AnchorPane prefHeight="400.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.makery.address.view.HowToPlayController">
    <children>
-      <Text layoutX="203.0" layoutY="180.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Press spacebar to jump">
+      <Text layoutX="279.0" layoutY="178.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Press spacebar to jump">
          <font>
             <Font name="Rockwell" size="18.0" />
          </font>
       </Text>
-      <Text layoutX="143.0" layoutY="231.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Try to avoid as many cacti as you can! ">
+      <Text layoutX="218.0" layoutY="228.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Try to avoid as many cacti as you can! ">
          <font>
             <Font name="Rockwell" size="18.0" />
          </font>
       </Text>
-      <Label layoutX="206.0" layoutY="64.0" text="How to Play">
+      <Label layoutX="281.0" layoutY="65.0" text="How to Play">
          <font>
             <Font name="Rockwell" size="35.0" />
          </font>
       </Label>
-      <Button layoutX="254.0" layoutY="285.0" mnemonicParsing="false" onAction="#getHome" text="Back to Home" />
+      <Button layoutX="330.0" layoutY="280.0" mnemonicParsing="false" onAction="#getHome" text="Back to Home" />
    </children>
 </AnchorPane>

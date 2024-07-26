@@ -9,4 +9,8 @@ import scalafx.stage.Stage
 @sfxml
 class HowToPlayController (private val backButton: Button) {
 
+  // Define the method to handle the button click event
+  def getHome(event: ActionEvent): Unit = {
+    MainApp.showHomePage()
+  }
 }

@@ -40,16 +40,17 @@ object MainApp extends JFXApp {
     this.roots.setCenter(roots)
   }
 
-  def showGamePage(): Unit = {
-    val resource = getClass.getResource("view/GamePage.fxml")
+
+  def showRequestPlayerName(): Unit = {
+    val resource = getClass.getResource("view/RequestPlayerName.fxml")
     val loader = new FXMLLoader(resource, NoDependencyResolver)
     loader.load();
     val roots = loader.getRoot[jfxs.layout.AnchorPane]
     this.roots.setCenter(roots)
   }
 
-  def showRequestPlayerName(): Unit = {
-    val resource = getClass.getResource("view/RequestPlayerName.fxml")
+  def showGamePage(): Unit = {
+    val resource = getClass.getResource("view/GamePage.fxml")
     val loader = new FXMLLoader(resource, NoDependencyResolver)
     loader.load();
     val roots = loader.getRoot[jfxs.layout.AnchorPane]
