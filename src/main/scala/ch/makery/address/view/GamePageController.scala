@@ -7,11 +7,14 @@ import scalafx.Includes._
 import scalafxml.core.macros.sfxml
 import scalafx.stage.Stage
 import scalafx.event.ActionEvent
-import scalafx.scene.control.Button
+import scalafx.scene.control.{Button, Label}
 
 
 @sfxml
-class GamePageController (private val backButton: Button){
+class GamePageController (private val backButton: Button,
+                          private val playerName: Label,
+                          private val highScore: Label,
+                          private val currentScore: Label){
   def getHome(event: ActionEvent): Unit = {
     MainApp.showHomePage()
   }
