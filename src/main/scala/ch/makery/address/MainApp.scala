@@ -9,6 +9,7 @@ import javafx.{scene => jfxs}
 import scalafx.scene.canvas.Canvas
 import scalafx.scene.paint.Color
 import scalafx.animation.AnimationTimer
+import scalafx.scene.image.Image
 //import the dino, cacti, etc
 
 object MainApp extends JFXApp {
@@ -19,6 +20,7 @@ object MainApp extends JFXApp {
   stage = new PrimaryStage {
     resizable = false
     title = "Clothing Store POS System"
+    icons += new Image(getClass.getResourceAsStream("/img/leafappicon.png"))
     scene = new Scene{
       root = roots
     }
