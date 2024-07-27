@@ -1,5 +1,5 @@
 package ch.makery.address.model
 
-trait Collidable {
+trait Book {
 
 }
