@@ -18,22 +18,22 @@ object MainApp extends JFXApp {
   val roots = loader.getRoot[jfxs.layout.BorderPane]
   stage = new PrimaryStage {
     resizable = false
-    title = "Chrome Dinosaur Game"
+    title = "Clothing Store POS System"
     scene = new Scene{
       root = roots
     }
   }
 
-  def showHomePage(): Unit ={
-    val resource = getClass.getResource("view/HomePage.fxml")
+  def showMainPage(): Unit ={
+    val resource = getClass.getResource("view/MainPage.fxml")
     val loader = new FXMLLoader(resource, NoDependencyResolver)
     loader.load();
     val roots = loader.getRoot[jfxs.layout.AnchorPane]
     this.roots.setCenter(roots)
   }
 
-  def showHowToPlay(): Unit = {
-    val resource = getClass.getResource("view/HowToPlay.fxml")
+  def showCartPage(): Unit = {
+    val resource = getClass.getResource("view/CartPage.fxml")
     val loader = new FXMLLoader(resource, NoDependencyResolver)
     loader.load();
     val roots = loader.getRoot[jfxs.layout.AnchorPane]
@@ -41,21 +41,4 @@ object MainApp extends JFXApp {
   }
 
 
-  def showRequestPlayerName(): Unit = {
-    val resource = getClass.getResource("view/RequestPlayerName.fxml")
-    val loader = new FXMLLoader(resource, NoDependencyResolver)
-    loader.load();
-    val roots = loader.getRoot[jfxs.layout.AnchorPane]
-    this.roots.setCenter(roots)
-  }
-
-  def showGamePage(): Unit = {
-    val resource = getClass.getResource("view/GamePage.fxml")
-    val loader = new FXMLLoader(resource, NoDependencyResolver)
-    loader.load();
-    val roots = loader.getRoot[jfxs.layout.AnchorPane]
-    this.roots.setCenter(roots)
-  }
-
-  showHomePage()
 }

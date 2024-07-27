@@ -1,5 +1,3 @@
 package ch.makery.address.model
 
-class NonFictionBook {
-
-}
+case object SizeChart
