@@ -7,6 +7,9 @@ import scalafxml.core.{FXMLLoader, FXMLView, NoDependencyResolver}
 import javafx.{scene => jfxs}
 import scalafx.scene.paint.Color
 import scalafx.scene.image.Image
+import ch.makery.address.model.{Accessory, ClothingItem, Dress}
+import ch.makery.address.util.ClothesDatabase
+import ch.makery.address.util.Database._
 
 
 object MainApp extends JFXApp {
@@ -48,5 +51,9 @@ object MainApp extends JFXApp {
   }
 
   showWelcomePage()
+
+  // Setup the database
+  setupDB()
+
 
 }

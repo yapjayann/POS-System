@@ -1,27 +1,23 @@
 package ch.makery.address.util
-import scalikejdbc._ //third party library to make connection to database
-import ch.makery.address.model.ClothingItem
+
+import scalikejdbc._
+import ch.makery.address.model.{ClothingItem, Dress, Accessory}
 
 trait ClothesDatabase {
-  val derbyDriverClassname = "org.apache.derby.jdbc.EmbeddedDriver" //define DB class
-  //apache derby is an embedded database that runs with ur application (vs server based like oracle)
 
-  val dbURL = "jdbc:derby:myDB;create=true;"; //db url similar to http protocol
-  //protocol point to database ^
-  // initialize JDBC driver & connection pool
-  Class.forName(derbyDriverClassname) //load the driver class to JVM
+  val derbyDriverClassname = "org.apache.derby.jdbc.EmbeddedDriver"
+  val dbURL = "jdbc:derby:myDB;create=true;"
 
-  ConnectionPool.singleton(dbURL, "me", "mine") //url, username, password
+  // Initialize JDBC driver & connection pool
+  Class.forName(derbyDriverClassname)
+  ConnectionPool.singleton(dbURL, "me", "mine")
 
-  // ad-hoc session provider on the REPL
-  //implicit = default value
-  implicit val session = AutoSession
+  implicit val session: AutoSession.type = AutoSession
 
-
-}
-object Database extends ClothesDatabase {
   def setupDB(): Unit = {
-    if (!hasDBInitialized) initializeTable()
+    if (!hasDBInitialized) {
+      initializeTable()
+    }
   }
 
   def hasDBInitialized: Boolean = {
@@ -40,9 +36,66 @@ object Database extends ClothesDatabase {
           quantity INT,
           price DOUBLE,
           size CHAR,
-          material VARCHAR(255)
+          material VARCHAR(255),
+          type VARCHAR(20)
         )
       """.execute.apply()
     }
   }
+
+  def insertDress(dress: Dress): Unit = {
+    DB autoCommit { implicit session =>
+      sql"""
+        INSERT INTO ClothingItem (id, name, quantity, price, size, type)
+        VALUES (${dress.id}, ${dress.name}, ${dress.quantity}, ${dress.price}, ${dress.size}, 'Dress')
+      """.update.apply()
+    }
+  }
+
+  def insertAccessory(accessory: Accessory): Unit = {
+    DB autoCommit { implicit session =>
+      sql"""
+        INSERT INTO ClothingItem (id, name, quantity, price, material, type)
+        VALUES (${accessory.id}, ${accessory.name}, ${accessory.quantity}, ${accessory.price}, ${accessory.material}, 'Accessory')
+      """.update.apply()
+    }
+  }
+
+  def updateStock(item: ClothingItem): Unit = {
+    DB autoCommit { implicit session =>
+      sql"""
+        UPDATE ClothingItem SET quantity = ${item.quantity} WHERE id = ${item.id}
+      """.update.apply()
+    }
+  }
+
+  def fetchAllDresses(): List[Dress] = {
+    DB readOnly { implicit session =>
+      sql"SELECT * FROM ClothingItem WHERE type = 'Dress'"
+        .map(rs => {
+          val dress = new Dress(rs.string("id"))
+          dress.name = rs.string("name")
+          dress.quantity = rs.int("quantity")
+          dress.price = rs.double("price")
+          dress.size = rs.string("size").charAt(0)
+          dress
+        }).list.apply()
+    }
+  }
+
+  def fetchAllAccessories(): List[Accessory] = {
+    DB readOnly { implicit session =>
+      sql"SELECT * FROM ClothingItem WHERE type = 'Accessory'"
+        .map(rs => {
+          val accessory = new Accessory(rs.string("id"))
+          accessory.name = rs.string("name")
+          accessory.quantity = rs.int("quantity")
+          accessory.price = rs.double("price")
+          accessory.material = rs.string("material")
+          accessory
+        }).list.apply()
+    }
+  }
 }
+
+object Database extends ClothesDatabase
