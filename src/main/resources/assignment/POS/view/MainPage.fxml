@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane prefHeight="500.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.makery.address.view.MainPageController">
+<AnchorPane prefHeight="500.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="assignment.POS.view.MainPageController">
    <children>
       <SplitPane dividerPositions="0.29797979797979796" layoutX="100.0" layoutY="64.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <items>
@@ -42,10 +42,10 @@
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
-                  <ImageView fitHeight="180.0" fitWidth="180.0" layoutX="166.0" layoutY="34.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="clothingItemImage" fitHeight="180.0" fitWidth="180.0" layoutX="166.0" layoutY="34.0" pickOnBounds="true" preserveRatio="true" />
                   <ButtonBar layoutX="186.0" layoutY="348.0" prefHeight="25.0" prefWidth="225.0" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0">
                      <buttons>
-                        <Button mnemonicParsing="false" text="Size Calculator" />
+                        <Button fx:id="sizeCalculatorButton" mnemonicParsing="false" onAction="#handleOpenSizeCalculator" text="Size Calculator" />
                         <Button mnemonicParsing="false" text="Add to Cart" />
                      </buttons>
                   </ButtonBar>
