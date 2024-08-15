@@ -60,6 +60,7 @@
                       <RowConstraints maxHeight="30.666656494140625" minHeight="10.0" prefHeight="30.666656494140625" vgrow="SOMETIMES" />
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
                         <Label text="Item Name: " />
@@ -72,6 +73,8 @@
                         <Label fx:id="stockValue" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                         <Label fx:id="priceValue" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                         <ChoiceBox fx:id="sizeValue" prefHeight="25.0" prefWidth="62.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                        <Label text="Material:" GridPane.rowIndex="5" />
+                        <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                      </children>
                   </GridPane>
                </children>

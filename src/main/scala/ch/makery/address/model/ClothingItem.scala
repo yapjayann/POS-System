@@ -2,27 +2,27 @@ package ch.makery.address.model
 
 import ch.makery.address.util.{ClothesDatabase, Database}
 
-abstract class ClothingItem(val id: String) extends Sellable {
-  var name: String = _
-  var quantity: Int = _
-  var price: Double = _
+abstract class ClothingItem(val id: String, val name: String, val price: Double) extends Sellable {
+  var quantity: Int = 0
 
   def save(): Unit
+
   def updateStock(newQuantity: Int): Unit = {
     this.quantity = newQuantity
   }
 }
 
-class Dress(_id: String) extends ClothingItem(_id) {
-  var size: Char = _
+
+case class Dress(override val id: String, override val name: String, override val price: Double, size: Char)
+  extends ClothingItem(id, name, price) {
 
   override def save(): Unit = {
     Database.insertDress(this)
   }
 }
 
-class Accessory(_id: String) extends ClothingItem(_id) {
-  var material: String = _
+case class Accessory(override val id: String, override val name: String, override val price: Double, material: String)
+  extends ClothingItem(id, name, price) {
 
   override def save(): Unit = {
     Database.insertAccessory(this)

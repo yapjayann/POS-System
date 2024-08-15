@@ -1,4 +1,5 @@
 package ch.makery.address.model
+import ch.makery.address.util.Database
 
 class ShoppingCart {
   private var items: Map[String, CartItem] = Map()
