@@ -1,4 +1,5 @@
-package ch.makery.address
+package assignment.game
+
 import scalafx.application.JFXApp
 import scalafx.application.JFXApp.PrimaryStage
 import scalafx.scene.Scene
@@ -7,9 +8,7 @@ import scalafxml.core.{FXMLLoader, FXMLView, NoDependencyResolver}
 import javafx.{scene => jfxs}
 import scalafx.scene.paint.Color
 import scalafx.scene.image.Image
-import ch.makery.address.model.{Accessory, ClothingItem, Dress}
-import ch.makery.address.util.ClothesDatabase
-import ch.makery.address.util.Database._
+
 
 
 object MainApp extends JFXApp {
@@ -20,7 +19,7 @@ object MainApp extends JFXApp {
   stage = new PrimaryStage {
     resizable = false
     title = "Clothing Store POS System"
-    icons += new Image(getClass.getResourceAsStream("/img/leafappicon.png"))
+    icons += new Image(getClass.getResourceAsStream("snake.png"))
     scene = new Scene{
       root = roots
     }
@@ -35,7 +34,7 @@ object MainApp extends JFXApp {
   }
 
   def showMainPage(): Unit ={
-    val resource = getClass.getResource("view/MainPage.fxml")
+    val resource = getClass.getResource("view/GamePage.fxml")
     val loader = new FXMLLoader(resource, NoDependencyResolver)
     loader.load();
     val roots = loader.getRoot[jfxs.layout.AnchorPane]
