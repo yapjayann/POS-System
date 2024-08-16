@@ -5,7 +5,7 @@ import scalafx.beans.property.{IntegerProperty, ObjectProperty, StringProperty}
 import scalafx.collections.ObservableBuffer
 import scalafx.scene.control.{Button, Label, TableColumn, TableView}
 import scalafxml.core.macros.sfxml
-import scalafx.beans.property.ReadOnlyObjectWrapper
+import scalafx.beans.value.ObservableValue
 
 @sfxml
 class CartPageController(private val cartTable: TableView[CartItem],
@@ -33,5 +33,17 @@ class CartPageController(private val cartTable: TableView[CartItem],
   }
   // Load cart items into TableView
   cartTable.items = ShoppingCart.instance.items
+
+  // Load cart items into TableView
+  cartTable.items = ShoppingCart.instance.items
+
+  // Function to update the total amount label
+  private def updateTotalAmount(): Unit = {
+    val totalAmount = ShoppingCart.instance.calculateTotalPrice
+    totalAmountValue.text = f"$$${totalAmount}%.2f"
+  }
+
+  // Update total amount when the controller is initialized
+  updateTotalAmount()
 
 }

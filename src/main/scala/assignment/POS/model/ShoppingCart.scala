@@ -60,6 +60,13 @@ class ShoppingCart {
   def clearCart(): Unit = {
     items.clear()
   }
+
+  // Method to calculate the total price of items in the cart
+  def calculateTotalPrice: Double = {
+    items.foldLeft(0.0) { (acc, cartItem) =>
+      acc + (cartItem.item.price * cartItem.quantity)
+    }
+  }
 }
 
 object ShoppingCart {
