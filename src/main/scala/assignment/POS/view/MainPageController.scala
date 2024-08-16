@@ -8,6 +8,8 @@ import scalafx.scene.control.{Button, Label, TableColumn, TableView}
 import scalafx.scene.image.{Image, ImageView}
 import scalafxml.core.macros.sfxml
 import scalafx.Includes._
+import scalafx.scene.control.Alert
+import scalafx.scene.control.Alert.AlertType
 
 
 @sfxml
@@ -106,11 +108,32 @@ class MainPageController (private val sizeCalculatorButton: Button,
     if (selectedDress != null) {
       ShoppingCart.instance.addItem(selectedDress)
       println(s"Added selected dress to cart: ${selectedDress.name}")
+      // Show a confirmation message for successfully adding a dress
+      val alert = new Alert(AlertType.Information) {
+        title = "Item Added"
+        headerText = "Success"
+        contentText = s"Added selected dress to cart: ${selectedDress.name}"
+      }
+      alert.showAndWait()
     } else if (selectedAccessory != null) {
       ShoppingCart.instance.addItem(selectedAccessory)
       println(s"Added selected accessory to cart: ${selectedAccessory.name}")
+      // Show a confirmation message for successfully adding an accessory
+      val alert = new Alert(AlertType.Information) {
+        title = "Item Added"
+        headerText = "Success"
+        contentText = s"Added selected accessory to cart: ${selectedAccessory.name}"
+      }
+      alert.showAndWait()
     } else {
       println("No item selected or multiple items selected")
+      // Show an error message if no item is selected
+      val alert = new Alert(AlertType.Error) {
+        title = "Selection Error"
+        headerText = "Please select an item."
+        contentText = "No item selected or multiple items selected."
+      }
+      alert.showAndWait()
     }
 
     // Print the cart contents to the console

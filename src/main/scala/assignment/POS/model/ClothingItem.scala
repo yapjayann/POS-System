@@ -18,16 +18,8 @@ case class Accessory(override val id: String, override val name: String, overrid
 
   override def save(): Unit = {
   }
-  override def equals(obj: Any): Boolean = {
-    obj match {
-      case that: ClothingItem => this.id == that.id && this.getClass == that.getClass
-      case _ => false
-    }
-  }
 
-  override def hashCode(): Int = {
-    (id, getClass).##
-  }
+
 }
 
 object ClothingItemModel {
