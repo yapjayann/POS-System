@@ -29,20 +29,20 @@
             <Label text="Shoulder measurement (cm):" GridPane.rowIndex="1" />
             <Label GridPane.rowIndex="2" />
             <Label text="Bust measurement (cm): " GridPane.rowIndex="2" />
-            <Label text="Wasit measurement (cm): " GridPane.rowIndex="3" />
+            <Label text="Waist measurement (cm): " GridPane.rowIndex="3" />
             <Label text="Hip measurement(cm): " GridPane.rowIndex="4" />
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <TextField fx:id="shoulderValue" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField fx:id="bustValue" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <TextField fx:id="waistValue" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <TextField fx:id="hipValue" GridPane.columnIndex="1" GridPane.rowIndex="4" />
             <ButtonBar GridPane.columnIndex="1" GridPane.rowIndex="5">
                <buttons>
-                  <Button cancelButton="true" mnemonicParsing="false" text="Cancel" />
-                  <Button defaultButton="true" mnemonicParsing="false" text="Calculate" />
+                  <Button fx:id="cancelButton" cancelButton="true" mnemonicParsing="false" onAction="#handleCancel" text="Cancel" />
+                  <Button fx:id="calculateButton" defaultButton="true" mnemonicParsing="false" onAction="#handleCalculate" text="Calculate" />
                </buttons>
             </ButtonBar>
             <Label text="Recommended Size: " />
-            <Label text="Enter your measurements first" GridPane.columnIndex="1" />
+            <Label fx:id="recommendedSizeValue" text="Enter your measurements first" GridPane.columnIndex="1" />
          </children>
       </GridPane>
       <Text layoutX="186.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Size Calculator" />

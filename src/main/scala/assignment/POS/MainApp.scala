@@ -18,7 +18,7 @@ object MainApp extends JFXApp {
   val roots = loader.getRoot[jfxs.layout.BorderPane]
   stage = new PrimaryStage {
     resizable = false
-    title = "Clothing Store POS System"
+    title = "Animal Crossing-Themed Clothing Store POS System"
     icons += new Image(getClass.getResourceAsStream("/img/leafappicon.png"))
     scene = new Scene{
       root = roots
