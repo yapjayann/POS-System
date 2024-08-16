@@ -1,60 +1,61 @@
 package assignment.POS.model
+import scalafx.collections.ObservableBuffer
+import assignment.POS.model.{ClothingItem, CartItem}
 
-import scala.collection.mutable.Map
 
 class ShoppingCart {
 
-  // Use a mutable Map to track items by their ID
-  private var cartItems: Map[String, CartItem] = Map()
+  // Observable buffer to track items in the cart
+  val items: ObservableBuffer[CartItem] = new ObservableBuffer[CartItem]()
 
-  // Add a Sellable item to the cart and update the internal data structure
+  // Method to add an item to the cart
   def addItem(item: Sellable): Unit = {
-    cartItems.get(item.id) match {
-      case Some(cartItem) =>
-        // If item already exists, update the quantity
-        val updatedItem = cartItem.updateQuantity(cartItem.quantity + 1)
-        cartItems.update(item.id, updatedItem)
-      case None =>
-        // If item does not exist, add it to the cart
-        val newItem = CartItem(item, 1)
-        cartItems += (item.id -> newItem)
+    // Check if the item is already in the cart
+    val existingItemIndex = items.indexWhere(_.item == item)
+
+    if (existingItemIndex >= 0) {
+      // If the item is already in the cart, update its quantity
+      val existingItem = items(existingItemIndex)
+      val updatedItem = existingItem.updateQuantity(existingItem.quantity + 1)
+      items.update(existingItemIndex, updatedItem)
+    } else {
+      // If the item is not in the cart, add it with a quantity of 1
+      items += CartItem(item, 1)
     }
   }
 
-  // Remove a Sellable item from the cart and update the internal data structure
+  // Method to remove an item from the cart
   def removeItem(item: Sellable): Unit = {
-    cartItems.get(item.id) match {
-      case Some(cartItem) if cartItem.quantity > 1 =>
-        // If quantity > 1, decrease the quantity
-        val updatedItem = cartItem.updateQuantity(cartItem.quantity - 1)
-        cartItems.update(item.id, updatedItem)
-      case Some(_) =>
-        // If quantity is 1, remove the item from the cart
-        cartItems -= item.id
-      case None =>
-      // Item not found in the cart
+    // Check if the item is in the cart
+    val existingItemIndex = items.indexWhere(_.item == item)
+
+    if (existingItemIndex >= 0) {
+      val existingItem = items(existingItemIndex)
+      if (existingItem.quantity > 1) {
+        // If the item quantity is greater than 1, reduce the quantity
+        val updatedItem = existingItem.updateQuantity(existingItem.quantity - 1)
+        items.update(existingItemIndex, updatedItem)
+      } else {
+        // If the item quantity is 1, remove it from the cart
+        items.remove(existingItemIndex)
+      }
     }
   }
 
-  // Get all items in the cart
-  def getItems: List[CartItem] = {
-    cartItems.values.toList
-  }
-
-  // Get total price of all items in the cart
-  def getTotal: Double = {
-    getItems.map(_.totalPrice).sum
-  }
-
-  // Print all items in the cart to the console
+  // Method to print the contents of the cart (for debugging purposes)
   def printCart(): Unit = {
-    println("Shopping Cart Contents:")
-    getItems.foreach { item =>
-      println(s"Item: ${item.item.name}, Quantity: ${item.quantity}, Total Price: ${item.totalPrice}")
+    println("Shopping Cart:")
+    items.foreach { cartItem =>
+      println(s"${cartItem.item.name} - Quantity: ${cartItem.quantity}, Total Price: ${cartItem.totalPrice}")
     }
-    println(s"Total Cart Price: ${getTotal}")
+  }
+
+  // Method to clear the cart
+  def clearCart(): Unit = {
+    items.clear()
   }
 }
+
 
 
 

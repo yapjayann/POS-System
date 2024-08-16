@@ -21,10 +21,10 @@
                <children>
                   <VBox layoutX="24.0" layoutY="53.0" prefHeight="398.0" prefWidth="190.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
-                        <TableView prefHeight="398.0" prefWidth="267.0">
+                        <TableView fx:id="cartTable" prefHeight="398.0" prefWidth="267.0">
                           <columns>
-                            <TableColumn prefWidth="93.66665649414062" text="Item" />
-                            <TableColumn prefWidth="79.33334350585938" text="Quantity" />
+                            <TableColumn fx:id="itemColumn" prefWidth="93.66665649414062" text="Item" />
+                            <TableColumn fx:id="quantityColumn" prefWidth="79.33334350585938" text="Quantity" />
                           </columns>
                            <columnResizePolicy>
                               <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -40,7 +40,7 @@
                           </rowConstraints>
                            <children>
                               <Label text="Total Amount: " />
-                              <Label fx:id="totalAmount" text="Label" GridPane.columnIndex="1" />
+                              <Label fx:id="totalAmountValue" text="Label" GridPane.columnIndex="1" />
                            </children>
                         </GridPane>
                      </children>
@@ -51,9 +51,9 @@
                <children>
                   <ButtonBar layoutX="123.0" layoutY="359.0" prefHeight="25.0" prefWidth="309.0" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0">
                      <buttons>
-                        <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="96.0" text="Edit Quantity" />
-                        <Button mnemonicParsing="false" text="Remove" />
-                        <Button defaultButton="true" mnemonicParsing="false" text="Check Out" />
+                        <Button fx:id="editQuantityButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="96.0" text="Edit Quantity" />
+                        <Button fx:id="removeButton" mnemonicParsing="false" text="Remove" />
+                        <Button fx:id="checkOutButton" defaultButton="true" mnemonicParsing="false" text="Check Out" />
                      </buttons>
                   </ButtonBar>
                   <GridPane layoutX="101.0" layoutY="164.0">
@@ -73,15 +73,15 @@
                         <Label text="Item Name" />
                         <Label text="Item ID" GridPane.rowIndex="1" />
                         <Label text="Price" GridPane.rowIndex="2" />
-                        <Label text="Label" GridPane.columnIndex="1" />
-                        <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <Label fx:id="itemNameValue" text="Label" GridPane.columnIndex="1" />
+                        <Label fx:id="itemIDValue" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <Label fx:id="priceValue" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                         <Label text="Size" GridPane.rowIndex="3" />
-                        <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <Label fx:id="sizeValue" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                         <Label text="Material" GridPane.rowIndex="4" />
-                        <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                        <Label fx:id="materialValue" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                         <Label text="Quantity:" GridPane.rowIndex="5" />
-                        <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                        <Label fx:id="quantityValue" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                      </children>
                   </GridPane>
                   <ImageView fitHeight="150.0" fitWidth="150.0" layoutX="126.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
