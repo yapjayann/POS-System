@@ -20,4 +20,6 @@ class CartPageController(private val cartTable: TableView[CartItem],
                          private val removeButton: Button,
                          private val checkOutButton: Button
                         ) {
+
+
 }

@@ -20,11 +20,8 @@ object MainApp extends JFXApp {
   val shoppingCart = new ShoppingCart()
 
 
-  // Load items into ClothingItemModel
-  ClothingItemModel
 
-
-  /** Add items to cart and print cart contents
+  //Add items to cart and print cart contents
   def addItemsToCart(): Unit = {
     shoppingCart.addItem(catDress)
     shoppingCart.addItem(fancyKimono)
@@ -42,7 +39,7 @@ object MainApp extends JFXApp {
 
     println("\nAfter Removal:")
     shoppingCart.printCart() // Print the cart contents to the console
-  } **/
+  }
 
 
   val rootResource = getClass.getResource("view/RootLayout.fxml")
