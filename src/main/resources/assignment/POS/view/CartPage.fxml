@@ -51,9 +51,9 @@
                <children>
                   <ButtonBar layoutX="123.0" layoutY="359.0" prefHeight="25.0" prefWidth="309.0" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0">
                      <buttons>
-                        <Button fx:id="editQuantityButton" mnemonicParsing="false" onAction="#handleEditQuantity" prefHeight="25.0" prefWidth="96.0" text="Edit Quantity" />
+                        <Button fx:id="editQuantityButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="96.0" text="Edit Quantity" />
                         <Button fx:id="removeButton" mnemonicParsing="false" onAction="#handleRemoveItem" text="Remove" />
-                        <Button fx:id="checkOutButton" defaultButton="true" mnemonicParsing="false" onAction="#handleCheckOut" text="Check Out" />
+                        <Button fx:id="checkOutButton" defaultButton="true" mnemonicParsing="false" text="Check Out" />
                      </buttons>
                   </ButtonBar>
                   <GridPane layoutX="101.0" layoutY="164.0">

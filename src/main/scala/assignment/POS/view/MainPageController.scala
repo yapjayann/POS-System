@@ -25,7 +25,7 @@ class MainPageController (private val sizeCalculatorButton: Button,
                           private val itemIDValue: Label,
                           private val priceValue: Label,
                           private val sizeValue: Label,
-                          private val materialValue: Label
+                          private val materialValue: Label,
                          ) {
 
   // Initialize the tables with data from MainApp
@@ -91,10 +91,6 @@ class MainPageController (private val sizeCalculatorButton: Button,
     showItemDetails(Option(selectedItem))
   }
 
-  // Handle button actions
-  def handleSizeCalculator(action: ActionEvent): Unit = {
-    // Implement size calculator logic here
-  }
 
   //add to cart
   def handleAddToCart(action: ActionEvent): Unit = {
@@ -138,5 +134,9 @@ class MainPageController (private val sizeCalculatorButton: Button,
 
     // Print the cart contents to the console
     ShoppingCart.instance.printCart()
+  }
+
+  def getSizeCalculator(): Unit = {
+    MainApp.showCalculateSizeDialog()
   }
 }
