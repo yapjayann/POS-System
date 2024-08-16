@@ -9,16 +9,22 @@ class ShoppingCart {
   val items: ObservableBuffer[CartItem] = new ObservableBuffer[CartItem]()
 
   // Method to add an item to the cart
+  // Method to add an item to the cart
   def addItem(item: Sellable): Unit = {
+    println(s"Adding item: ${item.name}, ID: ${item.id}, Type: ${item.getClass.getSimpleName}")
+
     // Check if the item is already in the cart
-    val existingItemIndex = items.indexWhere(_.item == item)
+    val existingItemIndex = items.indexWhere(cartItem =>
+      cartItem.item.id == item.id && cartItem.item.getClass == item.getClass)
 
     if (existingItemIndex >= 0) {
+      println(s"Item already in cart: ${item.name}, updating quantity.")
       // If the item is already in the cart, update its quantity
       val existingItem = items(existingItemIndex)
       val updatedItem = existingItem.updateQuantity(existingItem.quantity + 1)
       items.update(existingItemIndex, updatedItem)
     } else {
+      println(s"Item not in cart: ${item.name}, adding to cart.")
       // If the item is not in the cart, add it with a quantity of 1
       items += CartItem(item, 1)
     }
@@ -26,8 +32,8 @@ class ShoppingCart {
 
   // Method to remove an item from the cart
   def removeItem(item: Sellable): Unit = {
-    // Check if the item is in the cart
-    val existingItemIndex = items.indexWhere(_.item == item)
+    // Check if the item with the same id is in the cart
+    val existingItemIndex = items.indexWhere(_.item.id == item.id)
 
     if (existingItemIndex >= 0) {
       val existingItem = items(existingItemIndex)
@@ -56,8 +62,10 @@ class ShoppingCart {
   }
 }
 
-
-
+object ShoppingCart {
+  // Singleton instance of ShoppingCart
+  val instance: ShoppingCart = new ShoppingCart()
+}
 
 
 

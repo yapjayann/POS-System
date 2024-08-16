@@ -1,6 +1,6 @@
 package assignment.POS.view
 import assignment.POS.MainApp
-import assignment.POS.model.{Accessory, ClothingItem, ClothingItemModel, Dress, Sellable}
+import assignment.POS.model.{ShoppingCart,Accessory, ClothingItem, ClothingItemModel, Dress, Sellable}
 import scalafx.beans.property.{ObjectProperty, StringProperty}
 import scalafx.collections.ObservableBuffer
 import scalafx.event.ActionEvent
@@ -99,13 +99,21 @@ class MainPageController (private val sizeCalculatorButton: Button,
     val selectedDress = dressTable.selectionModel().selectedItem.value
     val selectedAccessory = accessoryTable.selectionModel().selectedItem.value
 
+    // Clear selection in both tables
+    dressTable.selectionModel().clearSelection()
+    accessoryTable.selectionModel().clearSelection()
+
     if (selectedDress != null) {
-      MainApp.shoppingCart.addItem(selectedDress)
+      ShoppingCart.instance.addItem(selectedDress)
+      println(s"Added selected dress to cart: ${selectedDress.name}")
     } else if (selectedAccessory != null) {
-      MainApp.shoppingCart.addItem(selectedAccessory)
+      ShoppingCart.instance.addItem(selectedAccessory)
+      println(s"Added selected accessory to cart: ${selectedAccessory.name}")
+    } else {
+      println("No item selected or multiple items selected")
     }
 
     // Print the cart contents to the console
-    MainApp.shoppingCart.printCart()
+    ShoppingCart.instance.printCart()
   }
 }

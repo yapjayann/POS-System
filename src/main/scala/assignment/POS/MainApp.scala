@@ -16,9 +16,6 @@ import scalafx.scene.image.ImageView
 
 object MainApp extends JFXApp {
 
-  // Initialize ShoppingCart
-  val shoppingCart = new ShoppingCart()
-
 
 
   val rootResource = getClass.getResource("view/RootLayout.fxml")
@@ -58,8 +55,5 @@ object MainApp extends JFXApp {
     this.roots.setCenter(roots)
   }
 
-
   showWelcomePage()
-
-
 }
