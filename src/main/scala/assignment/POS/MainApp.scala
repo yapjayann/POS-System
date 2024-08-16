@@ -1,6 +1,6 @@
 package assignment.POS
 
-import assignment.POS.model.{Accessory, CartItem, ClothingItem, Dress, ShoppingCart}
+import assignment.POS.model.{Accessory, CartItem, ClothingItem, ClothingItemModel, Dress, ShoppingCart}
 import assignment.POS.view.MainPageController
 import scalafx.application.JFXApp
 import scalafx.application.JFXApp.PrimaryStage
@@ -19,31 +19,12 @@ object MainApp extends JFXApp {
   // Initialize ShoppingCart
   val shoppingCart = new ShoppingCart()
 
-  // ObservableBuffers for clothing items
-  val dressItems = new ObservableBuffer[Dress]()
-  val accessoryItems = new ObservableBuffer[Accessory]()
 
-  // Example items
-  val catDress = Dress(id = "D11111", name = "Cat Dress", price = 29.99, imagePath = "/img/catdress.png", size = "M")
-  val fancyKimono = Dress(id = "D11112", name = "Fancy Kimono", price = 49.99, imagePath = "/img/fancykimono.png", size = "L")
-  val magicalDress = Dress(id = "D11113", name = "Magical Dress", price = 59.99, imagePath = "/img/magicaldress.png", size = "S")
-  val sweetDress = Dress(id = "D11114", name = "Sweet Dress", price = 39.99, imagePath = "/img/sweetdress.png", size = "XL")
-  val giantRibbon = Accessory(id = "A22221", name = "Giant Ribbon", price = 9.99, imagePath = "/img/giantribbon.png", material = "Silk")
-  val miniPleatherBag = Accessory(id = "A22222", name = "Mini Pleather Bag", price = 19.99, imagePath = "/img/minipleatherbag.png", material = "Pleather")
-  val heartShades = Accessory(id = "A22223", name = "Heart Shades", price = 29.99, imagePath = "/img/heartshades.png", material = "Plastic")
-  val roundFrameGlasses = Accessory(id = "A22224", name = "Round-Frame Glasses", price = 29.99, imagePath = "/img/roundframeglasses.png", material = "Glass and Metal")
+  // Load items into ClothingItemModel
+  ClothingItemModel
 
-  // Add items to ObservableBuffers
-  dressItems += catDress
-  dressItems += fancyKimono
-  dressItems += magicalDress
-  dressItems += sweetDress
-  accessoryItems += giantRibbon
-  accessoryItems += miniPleatherBag
-  accessoryItems += heartShades
-  accessoryItems += roundFrameGlasses
 
-  // Add items to cart and print cart contents
+  /** Add items to cart and print cart contents
   def addItemsToCart(): Unit = {
     shoppingCart.addItem(catDress)
     shoppingCart.addItem(fancyKimono)
@@ -61,7 +42,7 @@ object MainApp extends JFXApp {
 
     println("\nAfter Removal:")
     shoppingCart.printCart() // Print the cart contents to the console
-  }
+  } **/
 
 
   val rootResource = getClass.getResource("view/RootLayout.fxml")
@@ -105,8 +86,8 @@ object MainApp extends JFXApp {
   showWelcomePage()
 
 
-  // Add items and print
+  /** Add items and print
   addItemsToCart()
   // Remove items from cart and print
-  removeItemsFromCart()
+  removeItemsFromCart() **/
 }

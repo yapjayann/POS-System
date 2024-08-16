@@ -1,6 +1,6 @@
 package assignment.POS.view
 import assignment.POS.MainApp
-import assignment.POS.model.{Sellable,ClothingItem, Dress, Accessory}
+import assignment.POS.model.{Accessory, ClothingItem, ClothingItemModel, Dress, Sellable}
 import scalafx.beans.property.{ObjectProperty, StringProperty}
 import scalafx.collections.ObservableBuffer
 import scalafx.event.ActionEvent
@@ -27,8 +27,8 @@ class MainPageController (private val sizeCalculatorButton: Button,
                          ) {
 
   // Initialize the tables with data from MainApp
-  dressTable.items = MainApp.dressItems
-  accessoryTable.items = MainApp.accessoryItems
+  dressTable.items = ClothingItemModel.dressItems
+  accessoryTable.items = ClothingItemModel.accessoryItems
 
   // Set up cell value factories for dress table
   dressNameColumn.cellValueFactory = { cellData =>
