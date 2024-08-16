@@ -1,5 +1,7 @@
 package assignment.POS.view
-import assignment.POS.model.CartItem
+import assignment.POS.model.{CartItem,Sellable}
+import scalafx.Includes._
+import scalafx.collections.ObservableBuffer
 import scalafx.scene.control.{Button, Label, TableColumn, TableView}
 import scalafxml.core.macros.sfxml
 
@@ -18,5 +20,4 @@ class CartPageController(private val cartTable: TableView[CartItem],
                          private val removeButton: Button,
                          private val checkOutButton: Button
                         ) {
-
 }

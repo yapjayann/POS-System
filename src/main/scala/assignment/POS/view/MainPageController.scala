@@ -1,6 +1,6 @@
 package assignment.POS.view
 import assignment.POS.MainApp
-import assignment.POS.model.{ClothingItem, Dress, Accessory}
+import assignment.POS.model.{Sellable,ClothingItem, Dress, Accessory}
 import scalafx.beans.property.{ObjectProperty, StringProperty}
 import scalafx.collections.ObservableBuffer
 import scalafx.event.ActionEvent
@@ -94,7 +94,8 @@ class MainPageController (private val sizeCalculatorButton: Button,
     // Implement size calculator logic here
   }
 
+  //add to cart
   def handleAddToCart(action: ActionEvent): Unit = {
-    // Implement add to cart logic here
+    //implement add to cart logic
   }
 }
