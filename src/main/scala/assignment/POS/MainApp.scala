@@ -21,27 +21,6 @@ object MainApp extends JFXApp {
 
 
 
-  //Add items to cart and print cart contents
-  def addItemsToCart(): Unit = {
-    shoppingCart.addItem(catDress)
-    shoppingCart.addItem(fancyKimono)
-    shoppingCart.addItem(giantRibbon)
-    shoppingCart.addItem(miniPleatherBag)
-    shoppingCart.addItem(catDress) // Test quantity update
-
-    shoppingCart.printCart() // Print the cart contents to the console
-  }
-
-  // Remove items from cart and print cart contents
-  def removeItemsFromCart(): Unit = {
-    shoppingCart.removeItem(catDress) // Remove one Cat Dress
-    shoppingCart.removeItem(miniPleatherBag) // Remove Mini Leather Bag
-
-    println("\nAfter Removal:")
-    shoppingCart.printCart() // Print the cart contents to the console
-  }
-
-
   val rootResource = getClass.getResource("view/RootLayout.fxml")
   val loader = new FXMLLoader(rootResource, NoDependencyResolver)
   loader.load();
@@ -83,8 +62,4 @@ object MainApp extends JFXApp {
   showWelcomePage()
 
 
-  /** Add items and print
-  addItemsToCart()
-  // Remove items from cart and print
-  removeItemsFromCart() **/
 }

@@ -79,12 +79,12 @@
                         <Label text="Item ID:" GridPane.rowIndex="1" />
                         <Label text="Price: " GridPane.rowIndex="2" />
                         <Label text="Size:" GridPane.rowIndex="3" />
-                        <Label fx:id="itemNameValue" text="Label" GridPane.columnIndex="1" />
-                        <Label fx:id="itemIDValue" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <Label fx:id="priceValue" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <Label fx:id="itemNameValue" GridPane.columnIndex="1" />
+                        <Label fx:id="itemIDValue" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <Label fx:id="priceValue" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                         <Label text="Material:" GridPane.rowIndex="4" />
-                        <Label fx:id="materialValue" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                        <Label fx:id="sizeValue" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <Label fx:id="materialValue" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                        <Label fx:id="sizeValue" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                      </children>
                   </GridPane>
                </children>

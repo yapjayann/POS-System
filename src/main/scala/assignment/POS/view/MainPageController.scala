@@ -96,6 +96,16 @@ class MainPageController (private val sizeCalculatorButton: Button,
 
   //add to cart
   def handleAddToCart(action: ActionEvent): Unit = {
-    //implement add to cart logic
+    val selectedDress = dressTable.selectionModel().selectedItem.value
+    val selectedAccessory = accessoryTable.selectionModel().selectedItem.value
+
+    if (selectedDress != null) {
+      MainApp.shoppingCart.addItem(selectedDress)
+    } else if (selectedAccessory != null) {
+      MainApp.shoppingCart.addItem(selectedAccessory)
+    }
+
+    // Print the cart contents to the console
+    MainApp.shoppingCart.printCart()
   }
 }
