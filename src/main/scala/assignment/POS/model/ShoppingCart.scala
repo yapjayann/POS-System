@@ -1,8 +1,10 @@
 package assignment.POS.model
+import assignment.POS.MainApp.saveCartItems
 import scalafx.collections.ObservableBuffer
-import assignment.POS.model.{ClothingItem, CartItem}
+import assignment.POS.model.{CartItem, ClothingItem}
+import assignment.POS.util.CartDatabase
 
-class ShoppingCart {
+class ShoppingCart extends CartDatabase {
 
   // Observable buffer to track items in the cart
   val items: ObservableBuffer[CartItem[_ <: Sellable]] = new ObservableBuffer[CartItem[_ <: Sellable]]()
@@ -23,6 +25,7 @@ class ShoppingCart {
       println(s"Item not in cart: ${item.name}, adding to cart.")
       items += CartItem(item, 1)
     }
+    saveCartItems(items)
   }
 
   // Method to remove an item from the cart
@@ -44,11 +47,13 @@ class ShoppingCart {
     } else {
       println(s"Item not found in cart: ${item.name}")
     }
+    saveCartItems(items)
   }
 
   def removeItemCompletely[T <: Sellable](item: T): Unit = {
     println(s"Removing item completely: ${item.name}, ID: ${item.id}")
     items.removeAll(items.filter(_.item.id == item.id))
+    saveCartItems(items)
   }
 
   // Method to print the contents of the cart (for debugging purposes)
@@ -59,10 +64,10 @@ class ShoppingCart {
     }
   }
 
-
   // Method to clear the cart
   def clearCart(): Unit = {
     items.clear()
+    saveCartItems(items)
   }
 
   // Method to calculate the total price of items in the cart
