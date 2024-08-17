@@ -1,5 +1,6 @@
 package assignment.POS.model
 
+
 case class SizeChart(shoulder: Double, bust: Double, waist: Double, hip: Double) {
   def recommendSize: String = {
     (shoulder, bust, waist, hip) match {

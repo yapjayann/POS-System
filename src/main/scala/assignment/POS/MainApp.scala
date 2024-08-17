@@ -8,13 +8,16 @@ import scalafx.Includes._
 import scalafxml.core.{FXMLLoader, FXMLView, NoDependencyResolver}
 import javafx.{scene => jfxs}
 import scalafx.scene.image.Image
-import scalafx.scene.image.ImageView
 import scalafx.stage.{Modality, Stage}
-
+import scalafx.scene.media.{Media, MediaPlayer}
 
 
 object MainApp extends JFXApp {
-
+  private val soundtrack = new Media(getClass.getResource("/sound/Able Sisters (Sabel & Mable) - Animal Crossing New Leaf.mp3").toString)
+  private val player = new MediaPlayer(soundtrack)
+  // Set the MediaPlayer to loop the soundtrack indefinitely
+  player.setCycleCount(MediaPlayer.Indefinite)
+  player.play()
   val rootResource = getClass.getResource("view/RootLayout.fxml")
   val loader = new FXMLLoader(rootResource, NoDependencyResolver)
   loader.load();

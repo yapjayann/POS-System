@@ -8,13 +8,13 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: pink;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="assignment.POS.view.WelcomePageController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #f8eebc;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="assignment.POS.view.WelcomePageController">
    <children>
       <VBox alignment="CENTER" prefHeight="400.0" prefWidth="600.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Able Sisters Clothing Store">
+            <Text fill="#786951" strokeType="OUTSIDE" strokeWidth="0.0" text="Able Sisters Clothing Store">
                <font>
-                  <Font name="MV Boli" size="31.0" />
+                  <Font name="Arial Rounded MT Bold" size="28.0" />
                </font>
             </Text>
             <ImageView fitHeight="177.0" fitWidth="305.0" pickOnBounds="true" preserveRatio="true">
@@ -22,12 +22,15 @@
                   <Image url="@/img/ablesisters.png" />
                </image>
             </ImageView>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome Back! ">
+            <Text fill="#786951" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome Back!">
                <font>
-                  <Font name="Cambria" size="19.0" />
+                  <Font name="Arial Rounded MT Bold" size="24.0" />
                </font>
             </Text>
-            <Button fx:id="logIn" defaultButton="true" mnemonicParsing="false" onAction="#getMain" style="-fx-background-color: lightblue;" text="Log in" />
+            <Button fx:id="logIn" defaultButton="true" mnemonicParsing="false" onAction="#getMain" prefHeight="33.0" prefWidth="116.0" style="-fx-background-color: #88c9a1; -fx-background-radius: 10;" text="Log in" textFill="WHITE">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="14.0" />
+               </font></Button>
          </children>
       </VBox>
    </children>

@@ -2,14 +2,11 @@ package assignment.POS.view
 import assignment.POS.MainApp
 import assignment.POS.model.{Accessory, CartItem, Dress, Sellable, ShoppingCart}
 import scalafx.Includes._
-import scalafx.beans.property.{IntegerProperty, ObjectProperty, StringProperty}
-import scalafx.collections.ObservableBuffer
+import scalafx.beans.property.{StringProperty}
 import scalafx.scene.control.{Alert, Button, Label, TableColumn, TableView}
 import scalafxml.core.macros.sfxml
-import scalafx.beans.value.ObservableValue
 import scalafx.scene.control.Alert.AlertType
 import scalafx.scene.image.{Image, ImageView}
-import assignment.POS.MainApp
 
 @sfxml
 class CartPageController(private val cartTable: TableView[CartItem[_ <: Sellable]],

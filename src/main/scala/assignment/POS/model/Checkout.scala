@@ -1,7 +1,9 @@
 package assignment.POS.model
 
+// Case class to represent Voucher
 case class Voucher(name: String, apply: Double => Double)
 
+// For Checkout logic
 class Checkout {
   val vouchers: List[Voucher] = List(
     Voucher("No Discount", amount => amount),
