@@ -13,7 +13,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="281.0" prefWidth="470.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.makery.address.view.CheckoutPage">
+<AnchorPane prefHeight="281.0" prefWidth="470.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="assignment.POS.view.CheckoutPageController">
    <children>
       <GridPane layoutX="49.0" layoutY="51.0" prefHeight="349.0" prefWidth="470.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">
         <columnConstraints>
@@ -29,16 +29,16 @@
          <children>
             <Label text="Enter your amount: " GridPane.rowIndex="1" />
             <TextField fx:id="userAmount" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Label text="Payment Method: " GridPane.rowIndex="2" />
+            <Label text="Select Voucher" GridPane.rowIndex="2" />
             <ButtonBar GridPane.columnIndex="1" GridPane.rowIndex="3">
                <buttons>
-                  <Button fx:id="cancelPayment" cancelButton="true" mnemonicParsing="false" text="Cancel" />
-                  <Button fx:id="confirmPayment" defaultButton="true" mnemonicParsing="false" text="Confirm Payment" />
+                  <Button fx:id="cancelPaymentButton" cancelButton="true" mnemonicParsing="false" onAction="#handleCancelPayment" text="Cancel" />
+                  <Button fx:id="confirmPaymentButton" defaultButton="true" mnemonicParsing="false" onAction="#handleConfirmPayment" text="Confirm Payment" />
                </buttons>
             </ButtonBar>
             <Label text="Total Amount: " />
             <Label fx:id="totalAmount" text="Label" GridPane.columnIndex="1" />
-            <ChoiceBox fx:id="paymentMethodChoice" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <ChoiceBox fx:id="voucherChoice" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
          </children>
          <padding>
             <Insets left="30.0" right="30.0" />

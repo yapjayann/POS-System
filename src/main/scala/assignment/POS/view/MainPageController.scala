@@ -10,6 +10,7 @@ import scalafxml.core.macros.sfxml
 import scalafx.Includes._
 import scalafx.scene.control.Alert
 import scalafx.scene.control.Alert.AlertType
+import scala.util.{Try, Success, Failure}
 
 
 @sfxml

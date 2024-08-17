@@ -1,5 +1,6 @@
 package assignment.POS.view
-import assignment.POS.model.{Accessory, CartItem, Dress, ShoppingCart}
+import assignment.POS.MainApp
+import assignment.POS.model.{Accessory, CartItem, Dress, Sellable, ShoppingCart}
 import scalafx.Includes._
 import scalafx.beans.property.{IntegerProperty, ObjectProperty, StringProperty}
 import scalafx.collections.ObservableBuffer
@@ -10,9 +11,9 @@ import scalafx.scene.control.Alert.AlertType
 import scalafx.scene.image.{Image, ImageView}
 
 @sfxml
-class CartPageController(private val cartTable: TableView[CartItem],
-                         private val itemColumn: TableColumn[CartItem, String],
-                         private val quantityColumn: TableColumn[CartItem, String],
+class CartPageController(private val cartTable: TableView[CartItem[_ <: Sellable]],
+                         private val itemColumn: TableColumn[CartItem[_ <: Sellable], String],
+                         private val quantityColumn: TableColumn[CartItem[_ <: Sellable], String],
                          private val totalAmountValue: Label,
                          private val clothingItemImage: ImageView,
                          private val itemNameValue: Label,
@@ -68,7 +69,7 @@ class CartPageController(private val cartTable: TableView[CartItem],
   }
 
   // Function to show item details
-  private def showItemDetails(cartItem: Option[CartItem]): Unit = {
+  private def showItemDetails(cartItem: Option[CartItem[_ <: Sellable]]): Unit = {
     println(s"ShowItemDetails called with: $cartItem") // Debug print
     cartItem match {
       case Some(item) =>
@@ -129,6 +130,22 @@ class CartPageController(private val cartTable: TableView[CartItem],
           contentText = "No item selected selected to remove from cart."
         }
         alert.showAndWait()
+    }
+  }
+
+  def handleCheckout(): Unit = {
+    val totalAmount = ShoppingCart.instance.calculateTotalPrice
+    val checkoutSuccessful = MainApp.showCheckoutPageDialog(totalAmount)
+    if (checkoutSuccessful) {
+      // Clear the cart table and update the UI
+      cartTable.items().clear()
+      updateUI()
+      val alert = new Alert(AlertType.Information) {
+        title = "Payment Successful"
+        headerText = "You have successfully checked out."
+        contentText = "Thank you for your purchase."
+      }
+      alert.showAndWait()
     }
   }
 

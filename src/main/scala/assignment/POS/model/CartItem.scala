@@ -1,7 +1,9 @@
 package assignment.POS.model
 
-case class CartItem(item: Sellable, quantity: Int) {
-  def updateQuantity(newQuantity: Int): CartItem = {
+
+// Parametric polymorphism - CartItem can work with any type as long as T extends Sellable
+case class CartItem[T <: Sellable](item: T, quantity: Int) {
+  def updateQuantity(newQuantity: Int): CartItem[T] = {
     this.copy(quantity = newQuantity)
   }
 

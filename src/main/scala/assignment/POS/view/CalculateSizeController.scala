@@ -4,6 +4,7 @@ import assignment.POS.model.SizeChart
 import scalafx.scene.control.{Label, TextField}
 import scalafx.stage.Stage
 import scalafxml.core.macros.sfxml
+import scala.util.{Try, Success, Failure}
 
 @sfxml
 class CalculateSizeController(private val shoulderValue: TextField,
