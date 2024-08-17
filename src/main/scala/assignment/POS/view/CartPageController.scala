@@ -9,6 +9,7 @@ import scalafxml.core.macros.sfxml
 import scalafx.beans.value.ObservableValue
 import scalafx.scene.control.Alert.AlertType
 import scalafx.scene.image.{Image, ImageView}
+import assignment.POS.MainApp
 
 @sfxml
 class CartPageController(private val cartTable: TableView[CartItem[_ <: Sellable]],
@@ -49,7 +50,6 @@ class CartPageController(private val cartTable: TableView[CartItem[_ <: Sellable
   private def updateUI(): Unit = {
     updateTotalAmount()
     val selectedItem = Option(cartTable.selectionModel().getSelectedItem)
-    println(s"UpdateUI called, selected item: $selectedItem") // Debug print
     showItemDetails(selectedItem)
   }
 
@@ -58,19 +58,16 @@ class CartPageController(private val cartTable: TableView[CartItem[_ <: Sellable
 
   // listener to react to changes in the cart
   ShoppingCart.instance.items.onChange { (_, changes) =>
-    println(s"Cart changed: $changes") // Debug print
     updateUI()
   }
 
   // Selection listener for the cart table
   cartTable.selectionModel().selectedItem.onChange { (_, oldValue, newValue) =>
-    println(s"Selection changed: $oldValue -> $newValue") // Debug print
     showItemDetails(Option(newValue))
   }
 
   // Function to show item details
   private def showItemDetails(cartItem: Option[CartItem[_ <: Sellable]]): Unit = {
-    println(s"ShowItemDetails called with: $cartItem") // Debug print
     cartItem match {
       case Some(item) =>
         val clothingItem = item.item
@@ -140,12 +137,37 @@ class CartPageController(private val cartTable: TableView[CartItem[_ <: Sellable
       // Clear the cart table and update the UI
       cartTable.items().clear()
       updateUI()
-      val alert = new Alert(AlertType.Information) {
+      val alert = new Alert(AlertType.Confirmation) {
         title = "Payment Successful"
         headerText = "You have successfully checked out."
         contentText = "Thank you for your purchase."
       }
       alert.showAndWait()
+    }
+  }
+
+  def handleEditQuantity(): Unit = {
+    val selectedItem = Option(cartTable.selectionModel().getSelectedItem)
+    selectedItem match {
+      case Some(item) =>
+        MainApp.showEditQuantityDialog(item.quantity, newQuantity => {
+          if (newQuantity == 0) {
+            // Remove the item completely if quantity is set to 0
+            ShoppingCart.instance.removeItemCompletely(item.item)
+          } else {
+            val updatedItem = item.updateQuantity(newQuantity)
+            val index = ShoppingCart.instance.items.indexOf(item)
+            ShoppingCart.instance.items.update(index, updatedItem)
+          }
+          updateUI()
+        })
+      case None =>
+        val alert = new Alert(AlertType.Error) {
+          title = "Selection Error"
+          headerText = "Please select an item to edit."
+          contentText = "No item selected to edit quantity."
+        }
+        alert.showAndWait()
     }
   }
 

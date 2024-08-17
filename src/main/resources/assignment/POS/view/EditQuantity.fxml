@@ -9,8 +9,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Text?>
 
-
-<AnchorPane prefHeight="132.0" prefWidth="242.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.makery.address.view.EditQuantity">
+<AnchorPane prefHeight="132.0" prefWidth="242.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="assignment.POS.view.EditQuantityController">
    <children>
       <GridPane layoutX="77.0" layoutY="110.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
         <columnConstraints>
@@ -22,13 +21,13 @@
         </rowConstraints>
          <children>
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Enter your new quantity:" />
-            <TextField prefHeight="90.0" prefWidth="242.0" GridPane.rowIndex="1" />
+            <TextField fx:id="newQuantityValue" prefHeight="90.0" prefWidth="242.0" GridPane.rowIndex="1" />
          </children>
       </GridPane>
       <ButtonBar layoutX="406.0" layoutY="353.0" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0">
          <buttons>
-            <Button defaultButton="true" mnemonicParsing="false" text="Ok" />
-            <Button cancelButton="true" mnemonicParsing="false" text="Cancel" />
+            <Button fx:id="cancelButton" cancelButton="true" mnemonicParsing="false" onAction="#handleCancel" text="Cancel" />
+            <Button fx:id="okButton" defaultButton="true" mnemonicParsing="false" onAction="#handleOk" text="Ok" />
          </buttons>
       </ButtonBar>
    </children>

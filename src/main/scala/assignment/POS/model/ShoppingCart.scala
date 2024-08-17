@@ -2,8 +2,6 @@ package assignment.POS.model
 import scalafx.collections.ObservableBuffer
 import assignment.POS.model.{ClothingItem, CartItem}
 
-
-
 class ShoppingCart {
 
   // Observable buffer to track items in the cart
@@ -48,6 +46,11 @@ class ShoppingCart {
     }
   }
 
+  def removeItemCompletely[T <: Sellable](item: T): Unit = {
+    println(s"Removing item completely: ${item.name}, ID: ${item.id}")
+    items.removeAll(items.filter(_.item.id == item.id))
+  }
+
   // Method to print the contents of the cart (for debugging purposes)
   def printCart(): Unit = {
     println("Shopping Cart:")
@@ -55,6 +58,7 @@ class ShoppingCart {
       println(s"${cartItem.item.name} - Quantity: ${cartItem.quantity}, Total Price: ${cartItem.totalPrice}")
     }
   }
+
 
   // Method to clear the cart
   def clearCart(): Unit = {

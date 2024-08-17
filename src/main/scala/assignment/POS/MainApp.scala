@@ -1,6 +1,6 @@
 package assignment.POS
 
-import assignment.POS.view.{CalculateSizeController, CheckoutPageController}
+import assignment.POS.view.{CalculateSizeController, CheckoutPageController, EditQuantityController}
 import scalafx.application.JFXApp
 import scalafx.application.JFXApp.PrimaryStage
 import scalafx.scene.Scene
@@ -60,6 +60,7 @@ object MainApp extends JFXApp {
     val control = loader.getController[CalculateSizeController#Controller]
 
     val dialog = new Stage() {
+      resizable = false
       initModality(Modality.ApplicationModal)
       initOwner(stage)
       title = "Calculate Size"
@@ -80,6 +81,7 @@ object MainApp extends JFXApp {
     val control = loader.getController[CheckoutPageController#Controller]
 
     val dialog = new Stage() {
+      resizable = false
       initModality(Modality.ApplicationModal)
       initOwner(stage)
       title = "Checkout"
@@ -93,6 +95,29 @@ object MainApp extends JFXApp {
     dialog.showAndWait()
 
     control.checkoutSuccessful
+  }
+
+  def showEditQuantityDialog(currentQuantity: Int, callback: Int => Unit): Unit = {
+    val resource = getClass.getResource("view/EditQuantity.fxml")
+    val loader = new FXMLLoader(resource, NoDependencyResolver)
+    loader.load()
+    val roots2 = loader.getRoot[jfxs.layout.AnchorPane]
+    val control = loader.getController[EditQuantityController#Controller]
+
+    val dialog = new Stage() {
+      resizable = false
+      initModality(Modality.ApplicationModal)
+      initOwner(stage)
+      title = "Edit Quantity"
+      scene = new Scene {
+        root = roots2
+      }
+    }
+
+    control.dialogStage = dialog
+    control.resultCallback = callback
+    control.setInitialQuantity(currentQuantity)  // Use the new method here
+    dialog.showAndWait()
   }
 
   showWelcomePage()
