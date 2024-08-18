@@ -1,7 +1,8 @@
 package assignment.POS.model
 
-
+// Case class to hold measurements for sizing and determine recommended size
 case class SizeChart(shoulder: Double, bust: Double, waist: Double, hip: Double) {
+  // Method to recommend a size based on measurements
   def recommendSize: String = {
     (shoulder, bust, waist, hip) match {
       case (s, b, w, h) if s <= 35 && b <= 80 && w <= 60 && h <= 85 => "XS"
@@ -13,6 +14,7 @@ case class SizeChart(shoulder: Double, bust: Double, waist: Double, hip: Double)
     }
   }
 }
+// Companion object for SizeChart to provide an apply method for easy instantiation
 object SizeChart {
   def apply(shoulder: Double, bust: Double, waist: Double, hip: Double): SizeChart = {
     new SizeChart(shoulder, bust, waist, hip)

@@ -9,63 +9,55 @@ class ShoppingCart extends CartDatabase {
 
   // Method to add an item to the cart
   def addItem[T <: Sellable](item: T): Unit = {
-    println(s"Adding item: ${item.name}, ID: ${item.id}, Type: ${item.getClass.getSimpleName}")
 
+    // Check if the item is already in the cart
     val existingItemIndex = items.indexWhere(cartItem =>
       cartItem.item.id == item.id && cartItem.item.getClass == item.getClass)
 
     if (existingItemIndex >= 0) {
-      println(s"Item already in cart: ${item.name}, updating quantity.")
+      // Update quantity if item already in cart
       val existingItem = items(existingItemIndex)
       val updatedItem = existingItem.updateQuantity(existingItem.quantity + 1)
       items.update(existingItemIndex, updatedItem)
     } else {
-      println(s"Item not in cart: ${item.name}, adding to cart.")
+      // Add item if not already in cart
       items += CartItem(item, 1)
     }
-    saveCartItems(items)
+    saveCartItems(items) // Save cart items to database
   }
 
   // Method to remove an item from the cart
   def removeItem[T <: Sellable](item: T): Unit = {
-    println(s"Attempting to remove item: ${item.name}, ID: ${item.id}")
 
+    // Find the index of the item in the cart
     val existingItemIndex = items.indexWhere(_.item.id == item.id)
 
     if (existingItemIndex >= 0) {
       val existingItem = items(existingItemIndex)
       if (existingItem.quantity > 1) {
+        // Decrease quantity if more than one item is in the cart
         val updatedItem = existingItem.updateQuantity(existingItem.quantity - 1)
         items.update(existingItemIndex, updatedItem)
-        println(s"Decreased quantity for item: ${item.name}. New quantity: ${updatedItem.quantity}")
       } else {
+        // Remove item from cart if quantity is 1
         items.remove(existingItemIndex)
-        println(s"Removed item from cart: ${item.name}")
       }
-    } else {
-      println(s"Item not found in cart: ${item.name}")
     }
-    saveCartItems(items)
+    saveCartItems(items) // Save cart items to database
   }
 
+  // Method to remove all instances of an item from the cart
   def removeItemCompletely[T <: Sellable](item: T): Unit = {
     println(s"Removing item completely: ${item.name}, ID: ${item.id}")
     items.removeAll(items.filter(_.item.id == item.id))
-    saveCartItems(items)
+    saveCartItems(items) // Save cart items to database
   }
 
-  // Method to print the contents of the cart (for debugging purposes)
-  def printCart(): Unit = {
-    println("Shopping Cart:")
-    items.foreach { cartItem =>
-      println(s"${cartItem.item.name} - Quantity: ${cartItem.quantity}, Total Price: ${cartItem.totalPrice}")
-    }
-  }
 
-  // Method to clear the cart
+  // Method to clear all items from the cart
   def clearCart(): Unit = {
     items.clear()
-    saveCartItems(items)
+    saveCartItems(items) // Save cart items to database
   }
 
   // Method to calculate the total price of items in the cart

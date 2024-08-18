@@ -16,8 +16,8 @@ import scalafx.scene.media.{Media, MediaPlayer}
 
 
 object MainApp extends JFXApp with CartDatabase {
+  // Initialize the database and load cart items
   setupDB()
-  // Load cart items
   ShoppingCart.instance.items.clear()
   ShoppingCart.instance.items ++= loadCartItems()
 
@@ -32,32 +32,35 @@ object MainApp extends JFXApp with CartDatabase {
   loader.load();
   val roots = loader.getRoot[jfxs.layout.BorderPane]
 
+  // Configure the primary stage (main window) of the application
   stage = new PrimaryStage {
     resizable = false
     title = "Animal Crossing-Themed Clothing Store POS System"
-    icons += new Image(getClass.getResourceAsStream("/img/leafappicon.png"))
+    icons += new Image(getClass.getResourceAsStream("/img/leafappicon.png")) // Set the window icon
     scene = new Scene{
-      root = roots
+      root = roots // Set the root layout as the main scene
     }
   }
   // Save cart items when closing the app
   stage.onCloseRequest = event => {
-    saveCartItems(ShoppingCart.instance.items)
+    saveCartItems(ShoppingCart.instance.items) // Save current cart items to the database
   }
   def showWelcomePage(): Unit = {
     val resource = getClass.getResource("view/WelcomePage.fxml")
     val loader = new FXMLLoader(resource, NoDependencyResolver)
     loader.load();
     val roots = loader.getRoot[jfxs.layout.AnchorPane]
-    this.roots.setCenter(roots)
+    this.roots.setCenter(roots) // Set the Welcome Page as the center content of the RootLayout
   }
 
+
+  // Show Main (Shopping) Page
   def showMainPage(): Unit = {
     val resource = getClass.getResource("view/MainPage.fxml")
     val loader = new FXMLLoader(resource, NoDependencyResolver)
     loader.load();
     val roots = loader.getRoot[jfxs.layout.AnchorPane]
-    this.roots.setCenter(roots)
+    this.roots.setCenter(roots) // Set the Main Page as the center content of the RootLayout
   }
 
   def showCartPage(): Unit = {
@@ -77,7 +80,7 @@ object MainApp extends JFXApp with CartDatabase {
 
     val dialog = new Stage() {
       resizable = false
-      initModality(Modality.ApplicationModal)
+      initModality(Modality.ApplicationModal) // Make the dialog modal (blocks interaction with the main window)
       initOwner(stage)
       title = "Calculate Size"
       scene = new Scene {
@@ -85,10 +88,11 @@ object MainApp extends JFXApp with CartDatabase {
       }
     }
 
-    control.dialogStage = dialog
-    dialog.showAndWait()
+    control.dialogStage = dialog // Pass the dialog stage to the controller
+    dialog.showAndWait() // Show the dialog and wait for it to be closed
   }
 
+  // Show the Checkout Page dialog by loading the corresponding FXML file and passing the total amount to the controller
   def showCheckoutPageDialog(totalAmount: Double): Boolean = {
     val resource = getClass.getResource("view/CheckoutPageDialog.fxml")
     val loader = new FXMLLoader(resource, NoDependencyResolver)
@@ -107,12 +111,13 @@ object MainApp extends JFXApp with CartDatabase {
     }
 
     control.dialogStage = dialog
-    control.setTotalAmount(totalAmount)
+    control.setTotalAmount(totalAmount) // Pass the total amount to the controller
     dialog.showAndWait()
 
-    control.checkoutSuccessful
+    control.checkoutSuccessful // Return whether the checkout was successful
   }
 
+  // Show the Edit Quantity dialog by loading the corresponding FXML file and passing the current quantity and callback function to the controller
   def showEditQuantityDialog(currentQuantity: Int, callback: Int => Unit): Unit = {
     val resource = getClass.getResource("view/EditQuantityDialog.fxml")
     val loader = new FXMLLoader(resource, NoDependencyResolver)
@@ -131,10 +136,11 @@ object MainApp extends JFXApp with CartDatabase {
     }
 
     control.dialogStage = dialog
-    control.resultCallback = callback
-    control.setInitialQuantity(currentQuantity)
+    control.resultCallback = callback // Pass the callback function to handle the result
+    control.setInitialQuantity(currentQuantity) // Set the initial quantity in the dialog
     dialog.showAndWait()
   }
 
+  // Start the application by showing the Welcome Page
   showWelcomePage()
 }

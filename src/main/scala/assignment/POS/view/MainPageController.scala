@@ -30,36 +30,37 @@ class MainPageController (private val sizeCalculatorButton: Button,
                           private val tabPane: TabPane
                          ) {
 
-  // Initialize the tables with data from MainApp
+  // Initialize the tables with data from ClothingItemModel
   dressTable.items = ClothingItemModel.dressItems
   accessoryTable.items = ClothingItemModel.accessoryItems
 
   // Set up cell value factories for dress table
   dressNameColumn.cellValueFactory = { cellData =>
-    StringProperty(cellData.value.name) // Directly use name without .value
+    StringProperty(cellData.value.name) // Bind the Dress name property to the column
   }
 
   dressIDColumn.cellValueFactory = { cellData =>
-    StringProperty(cellData.value.id) // Directly use id without .value
+    StringProperty(cellData.value.id) // Bind the Dress ID property to the column
   }
 
   // Set up cell value factories for accessory table
   accessoryNameColumn.cellValueFactory = { cellData =>
-    StringProperty(cellData.value.name) // Directly use name without .value
+    StringProperty(cellData.value.name) // Bind the Accessory name property to the column
   }
 
   accessoryIDColumn.cellValueFactory = { cellData =>
-    StringProperty(cellData.value.id) // Directly use id without .value
+    StringProperty(cellData.value.id) // Bind the Accessory ID property to the column
   }
 
-  //Variables to store selected items
+  // Variables to store selected items
   private var selectedDress: Option[Dress] = None
   private var selectedAccessory: Option[Accessory] = None
 
-  // Show details of the selected item
+  // Show details of the selected item in the corresponding labels and image view
   private def showItemDetails(item: Option[ClothingItem]): Unit = {
     item match {
       case Some(clothingItem) =>
+        // Update UI elements with the selected item's details
         clothingItemImage.image = new Image(clothingItem.imagePath)
         itemNameValue.text = clothingItem.name
         itemIDValue.text = clothingItem.id
@@ -67,11 +68,13 @@ class MainPageController (private val sizeCalculatorButton: Button,
 
         clothingItem match {
           case dress: Dress =>
+            // Show size details for a Dress
             sizeValue.visible = true
             materialValue.visible = false
             sizeValue.text = s"${dress.size}"
 
           case accessory: Accessory =>
+            // Show material details for an Accessory
             sizeValue.visible = false
             materialValue.visible = true
             materialValue.text = accessory.material
@@ -88,7 +91,7 @@ class MainPageController (private val sizeCalculatorButton: Button,
     }
   }
 
-  // Set up listeners for table selections
+  // Set up listeners for table selections to update the displayed item details
   dressTable.selectionModel().selectedItem.onChange { (_, _, newValue) =>
     selectedDress = Option(newValue)
     selectedAccessory = None
@@ -101,7 +104,7 @@ class MainPageController (private val sizeCalculatorButton: Button,
     showItemDetails(selectedAccessory)
   }
 
-  // Add a listener to the tab selection
+  // Add a listener to the tab selection to clear selections when switching tabs
   tabPane.selectionModel().selectedItem.onChange { (_, _, newTab) =>
     if (newTab.getText == "Dresses") {
       accessoryTable.selectionModel().clearSelection()
@@ -113,14 +116,16 @@ class MainPageController (private val sizeCalculatorButton: Button,
     showItemDetails(None)
   }
 
-  // Add to cart
+  // Handle the "Add to Cart" button action
   def handleAddToCart(action: ActionEvent): Unit = {
+    // Determine which item (Dress or Accessory) is selected
     val itemToAdd: Option[Sellable] = selectedDress.orElse(selectedAccessory)
 
     itemToAdd match {
       case Some(item) =>
+        // Add the selected item to the shopping cart
         ShoppingCart.instance.addItem(item)
-        println(s"Added selected item to cart: ${item.name}")
+
 
         // Show a confirmation message
         val alert = new Alert(AlertType.Information) {
@@ -130,7 +135,7 @@ class MainPageController (private val sizeCalculatorButton: Button,
         }
         alert.showAndWait()
 
-        // Clear selections
+        // Clear selections after adding the item to the cart
         dressTable.selectionModel().clearSelection()
         accessoryTable.selectionModel().clearSelection()
         selectedDress = None
@@ -147,12 +152,11 @@ class MainPageController (private val sizeCalculatorButton: Button,
         }
         alert.showAndWait()
     }
-
-    // Print the cart contents to the console
-    ShoppingCart.instance.printCart()
   }
 
-  def getSizeCalculator(): Unit = {
+
+  // Handle the "Size Calculator" button action
+  def handleSizeCalculator(): Unit = {
     MainApp.showCalculateSizeDialog()
   }
 }

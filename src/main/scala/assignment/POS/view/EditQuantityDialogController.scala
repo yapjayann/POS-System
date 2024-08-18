@@ -11,13 +11,15 @@ class EditQuantityDialogController(private val newQuantityValue: TextField,
                                    private val okButton: Button,
                                    private val cancelButton: Button){
 
-  var dialogStage: Stage = _
-  var resultCallback: Int => Unit = _
+  var dialogStage: Stage = _ // Stage for the dialog
+  var resultCallback: Int => Unit = _ // Callback to handle the result
 
+  // Set the initial quantity value in the TextField
   def setInitialQuantity(quantity: Int): Unit = {
     newQuantityValue.text = quantity.toString
   }
 
+  // Handle OK button click
   def handleOk(): Unit = {
     try {
       val newQuantity = newQuantityValue.text.value.toInt
@@ -29,7 +31,7 @@ class EditQuantityDialogController(private val newQuantityValue: TextField,
           contentText = "Please enter a non-negative number"
         }.showAndWait()
       } else {
-        resultCallback(newQuantity)
+        resultCallback(newQuantity) // Call the result callback with the new quantity
         dialogStage.close()
       }
     } catch {
@@ -42,6 +44,7 @@ class EditQuantityDialogController(private val newQuantityValue: TextField,
     }
   }
 
+  // Handle Cancel button click
   def handleCancel(): Unit = {
     dialogStage.close()
   }

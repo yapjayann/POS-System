@@ -26,16 +26,16 @@ class CartPageController(private val cartTable: TableView[CartItem[_ <: Sellable
                          private val clearCartButton: Button
                         ) {
 
-  // Initialize TableView columns
+  // Initialize TableView columns with data from the cart items
   itemColumn.cellValueFactory = { cellData =>
-    StringProperty(cellData.value.item.name) // Use StringProperty directly
+    StringProperty(cellData.value.item.name) // Display the name of the item
   }
 
   quantityColumn.cellValueFactory = { cellData =>
     StringProperty(cellData.value.quantity.toString) // Convert quantity to String
   }
 
-  // Load cart items into TableView
+  // Load the items from the ShoppingCart into the TableView
   cartTable.items = ShoppingCart.instance.items
 
 
@@ -45,6 +45,7 @@ class CartPageController(private val cartTable: TableView[CartItem[_ <: Sellable
     totalAmountValue.text = f"$$${totalAmount}%.2f"
   }
 
+  // Function to update the UI, including the total amount and item details
   private def updateUI(): Unit = {
     updateTotalAmount()
     val selectedItem = Option(cartTable.selectionModel().getSelectedItem)
@@ -54,18 +55,6 @@ class CartPageController(private val cartTable: TableView[CartItem[_ <: Sellable
     clearCartButton.disable = ShoppingCart.instance.items.isEmpty
   }
 
-
-
-
-  // listener to react to changes in the cart
-  ShoppingCart.instance.items.onChange { (_, changes) =>
-    updateUI()
-  }
-
-  // Selection listener for the cart table
-  cartTable.selectionModel().selectedItem.onChange { (_, oldValue, newValue) =>
-    showItemDetails(Option(newValue))
-  }
 
   // Function to show item details
   private def showItemDetails(cartItem: Option[CartItem[_ <: Sellable]]): Unit = {
@@ -90,8 +79,6 @@ class CartPageController(private val cartTable: TableView[CartItem[_ <: Sellable
             materialValue.text = s"${accessory.material}"
         }
 
-        println(s"Item details set: ${itemNameValue.text()}, ${itemIDValue.text()}, ${priceValue.text()}, ${quantityValue.text()}") // Debug print
-
       case None =>
         clothingItemImage.image = null
         itemNameValue.text = ""
@@ -100,16 +87,16 @@ class CartPageController(private val cartTable: TableView[CartItem[_ <: Sellable
         sizeValue.text = ""
         materialValue.text = ""
         quantityValue.text = ""
-        println("No item selected, details cleared") // Debug print
     }
   }
 
+  // Handler for removing the selected item from the cart
   def handleRemoveItem(): Unit = {
     val selectedItem = Option(cartTable.selectionModel().getSelectedItem)
     selectedItem match {
       case Some(item) =>
         println(s"Removing item: ${item.item.name}")
-        ShoppingCart.instance.removeItem(item.item)
+        ShoppingCart.instance.removeItem(item.item) // Remove the item from the cart
         updateUI()
 
         // If the cart is now empty, clear the details
@@ -121,6 +108,7 @@ class CartPageController(private val cartTable: TableView[CartItem[_ <: Sellable
           cartTable.selectionModel().select(nextIndex)
         }
       case None =>
+        // Show an error if no item is selected to remove
         println("No item selected to remove")
         val alert = new Alert(AlertType.Error) {
           title = "Selection Error"
@@ -131,11 +119,12 @@ class CartPageController(private val cartTable: TableView[CartItem[_ <: Sellable
     }
   }
 
+  // Handler for checking out
   def handleCheckout(): Unit = {
     val totalAmount = ShoppingCart.instance.calculateTotalPrice
-    val checkoutSuccessful = MainApp.showCheckoutPageDialog(totalAmount)
+    val checkoutSuccessful = MainApp.showCheckoutPageDialog(totalAmount) // Show the checkout dialog
     if (checkoutSuccessful) {
-      // Clear the cart table and update the UI
+      // Clear the cart and update the UI if checkout was successful
       cartTable.items().clear()
       updateUI()
       val alert = new Alert(AlertType.Confirmation) {
@@ -147,6 +136,7 @@ class CartPageController(private val cartTable: TableView[CartItem[_ <: Sellable
     }
   }
 
+  // Handler for editing the quantity of the selected item
   def handleEditQuantity(): Unit = {
     val selectedItem = Option(cartTable.selectionModel().getSelectedItem)
     selectedItem match {
@@ -156,6 +146,7 @@ class CartPageController(private val cartTable: TableView[CartItem[_ <: Sellable
             // Remove the item completely if quantity is set to 0
             ShoppingCart.instance.removeItemCompletely(item.item)
           } else {
+            // Update the quantity of the item
             val updatedItem = item.updateQuantity(newQuantity)
             val index = ShoppingCart.instance.items.indexOf(item)
             ShoppingCart.instance.items.update(index, updatedItem)
@@ -164,6 +155,7 @@ class CartPageController(private val cartTable: TableView[CartItem[_ <: Sellable
         })
       case None =>
         val alert = new Alert(AlertType.Error) {
+          // Show an error if no item is selected to edit
           title = "Selection Error"
           headerText = "Please select an item to edit."
           contentText = "No item selected to edit quantity."
@@ -172,6 +164,7 @@ class CartPageController(private val cartTable: TableView[CartItem[_ <: Sellable
     }
   }
 
+  // Handler for clearing the cart
   def handleClearCart(): Unit = {
     // Show a confirmation dialog
     val alert = new Alert(AlertType.Confirmation) {
@@ -193,7 +186,17 @@ class CartPageController(private val cartTable: TableView[CartItem[_ <: Sellable
     }
   }
 
-  // Initialize the UI
+  // Listener to update the UI when the items in the cart change
+  ShoppingCart.instance.items.onChange { (_, changes) =>
+    updateUI()
+  }
+
+  // Listener to show item details when the selection changes
+  cartTable.selectionModel().selectedItem.onChange { (_, oldValue, newValue) =>
+    showItemDetails(Option(newValue))
+  }
+
+  // Initialize the UI when the controller is created
   updateUI()
 
 }

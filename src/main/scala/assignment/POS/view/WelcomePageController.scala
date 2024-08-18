@@ -11,7 +11,6 @@ import scalafxml.core.macros.sfxml
 class WelcomePageController (private val logIn: Button,
                              private val welcomePicture: ImageView){
 
-
   def getMain(event: ActionEvent): Unit = {
     MainApp.showMainPage()
   }

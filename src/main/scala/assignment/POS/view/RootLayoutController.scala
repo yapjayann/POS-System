@@ -5,6 +5,7 @@ import scalafx.event.ActionEvent
 import scalafx.scene.control.{MenuBar, MenuItem}
 import scalafxml.core.macros.sfxml
 
+// RootLayoutController used for navigation
 @sfxml
 class RootLayoutController (private val shop: MenuItem,
                             private val viewCart: MenuItem,

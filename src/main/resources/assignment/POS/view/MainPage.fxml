@@ -60,7 +60,7 @@
                   <ImageView fx:id="clothingItemImage" fitHeight="180.0" fitWidth="180.0" layoutX="166.0" layoutY="34.0" pickOnBounds="true" preserveRatio="true" />
                   <ButtonBar layoutX="186.0" layoutY="348.0" prefHeight="26.0" prefWidth="268.0" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0">
                      <buttons>
-                        <Button fx:id="sizeCalculatorButton" mnemonicParsing="false" onAction="#getSizeCalculator" style="-fx-background-color: #e3d878; -fx-background-radius: 10; -fx-cursor: hand;" text="Size Calculator" textFill="WHITE">
+                        <Button fx:id="sizeCalculatorButton" mnemonicParsing="false" onAction="#handleSizeCalculator" style="-fx-background-color: #e3d878; -fx-background-radius: 10; -fx-cursor: hand;" text="Size Calculator" textFill="WHITE">
                            <font>
                               <Font name="Arial Rounded MT Bold" size="13.0" />
                            </font>
