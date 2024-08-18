@@ -1,7 +1,5 @@
 package assignment.POS.model
-import assignment.POS.MainApp.saveCartItems
 import scalafx.collections.ObservableBuffer
-import assignment.POS.model.{CartItem, ClothingItem}
 import assignment.POS.util.CartDatabase
 
 class ShoppingCart extends CartDatabase {

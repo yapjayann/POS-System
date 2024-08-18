@@ -7,11 +7,11 @@ import scalafxml.core.macros.sfxml
 import scala.util.{Try, Success, Failure}
 
 @sfxml
-class CalculateSizeController(private val shoulderValue: TextField,
-                              private val bustValue: TextField,
-                              private val waistValue: TextField,
-                              private val hipValue: TextField,
-                              private val recommendedSizeValue: Label
+class CalculateSizeDialogController(private val shoulderValue: TextField,
+                                    private val bustValue: TextField,
+                                    private val waistValue: TextField,
+                                    private val hipValue: TextField,
+                                    private val recommendedSizeValue: Label
                              ) {
   var dialogStage: Stage = _
 
@@ -32,7 +32,7 @@ class CalculateSizeController(private val shoulderValue: TextField,
       recommendedSizeValue.text = recommendedSize
     } catch {
       case _: NumberFormatException =>
-        recommendedSizeValue.text = "Invalid input. Please enter numeric values."
+        recommendedSizeValue.text = "Invalid input."
     }
   }
 

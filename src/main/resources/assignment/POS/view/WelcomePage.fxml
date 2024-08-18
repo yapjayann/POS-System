@@ -27,7 +27,7 @@
                   <Font name="Arial Rounded MT Bold" size="24.0" />
                </font>
             </Text>
-            <Button fx:id="logIn" defaultButton="true" mnemonicParsing="false" onAction="#getMain" prefHeight="33.0" prefWidth="116.0" style="-fx-background-color: #88c9a1; -fx-background-radius: 10;" text="Log in" textFill="WHITE">
+            <Button fx:id="logIn" defaultButton="true" mnemonicParsing="false" onAction="#getMain" prefHeight="33.0" prefWidth="116.0" style="-fx-background-color: #88c9a1; -fx-background-radius: 10; -fx-cursor: hand;" text="Log in" textFill="WHITE">
                <font>
                   <Font name="Arial Rounded MT Bold" size="14.0" />
                </font></Button>

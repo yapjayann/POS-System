@@ -2,7 +2,7 @@ package assignment.POS
 
 import assignment.POS.model.ShoppingCart
 import assignment.POS.util.CartDatabase
-import assignment.POS.view.{CalculateSizeController, CheckoutPageController, EditQuantityController}
+import assignment.POS.view.{CalculateSizeDialogController, CheckoutPageDialogController, EditQuantityDialogController}
 import scalafx.application.JFXApp
 import scalafx.application.JFXApp.PrimaryStage
 import scalafx.scene.Scene
@@ -21,6 +21,7 @@ object MainApp extends JFXApp with CartDatabase {
   ShoppingCart.instance.items.clear()
   ShoppingCart.instance.items ++= loadCartItems()
 
+  // Background music
   private val soundtrack = new Media(getClass.getResource("/sound/Able Sisters (Sabel & Mable) - Animal Crossing New Leaf.mp3").toString)
   private val player = new MediaPlayer(soundtrack)
   // Set the MediaPlayer to loop the soundtrack indefinitely
@@ -68,11 +69,11 @@ object MainApp extends JFXApp with CartDatabase {
   }
 
   def showCalculateSizeDialog(): Unit = {
-    val resource = getClass.getResource("view/CalculateSize.fxml")
+    val resource = getClass.getResource("view/CalculateSizeDialog.fxml")
     val loader = new FXMLLoader(resource, NoDependencyResolver)
     loader.load()
     val roots2 = loader.getRoot[jfxs.layout.AnchorPane]
-    val control = loader.getController[CalculateSizeController#Controller]
+    val control = loader.getController[CalculateSizeDialogController#Controller]
 
     val dialog = new Stage() {
       resizable = false
@@ -89,11 +90,11 @@ object MainApp extends JFXApp with CartDatabase {
   }
 
   def showCheckoutPageDialog(totalAmount: Double): Boolean = {
-    val resource = getClass.getResource("view/CheckoutPage.fxml")
+    val resource = getClass.getResource("view/CheckoutPageDialog.fxml")
     val loader = new FXMLLoader(resource, NoDependencyResolver)
     loader.load()
     val roots2 = loader.getRoot[jfxs.layout.AnchorPane]
-    val control = loader.getController[CheckoutPageController#Controller]
+    val control = loader.getController[CheckoutPageDialogController#Controller]
 
     val dialog = new Stage() {
       resizable = false
@@ -113,11 +114,11 @@ object MainApp extends JFXApp with CartDatabase {
   }
 
   def showEditQuantityDialog(currentQuantity: Int, callback: Int => Unit): Unit = {
-    val resource = getClass.getResource("view/EditQuantity.fxml")
+    val resource = getClass.getResource("view/EditQuantityDialog.fxml")
     val loader = new FXMLLoader(resource, NoDependencyResolver)
     loader.load()
     val roots2 = loader.getRoot[jfxs.layout.AnchorPane]
-    val control = loader.getController[EditQuantityController#Controller]
+    val control = loader.getController[EditQuantityDialogController#Controller]
 
     val dialog = new Stage() {
       resizable = false
@@ -131,7 +132,7 @@ object MainApp extends JFXApp with CartDatabase {
 
     control.dialogStage = dialog
     control.resultCallback = callback
-    control.setInitialQuantity(currentQuantity)  // Use the new method here
+    control.setInitialQuantity(currentQuantity)
     dialog.showAndWait()
   }
 

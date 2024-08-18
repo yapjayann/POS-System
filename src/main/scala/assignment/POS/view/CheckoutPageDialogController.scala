@@ -9,11 +9,11 @@ import scalafx.stage.Stage
 import scalafxml.core.macros.sfxml
 
 @sfxml
-class CheckoutPageController(private val totalAmount: Label,
-                             private val userAmount: TextField,
-                             private val voucherChoice: ChoiceBox[String],
-                             private val cancelPaymentButton: Button,
-                             private val confirmPaymentButton: Button
+class CheckoutPageDialogController(private val totalAmount: Label,
+                                   private val userAmount: TextField,
+                                   private val voucherChoice: ChoiceBox[String],
+                                   private val cancelPaymentButton: Button,
+                                   private val confirmPaymentButton: Button
                             ) {
 
   var dialogStage: Stage = _

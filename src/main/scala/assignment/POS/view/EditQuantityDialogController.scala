@@ -7,9 +7,9 @@ import scalafx.scene.control.Alert.AlertType
 import scalafxml.core.macros.sfxml
 
 @sfxml
-class EditQuantityController (private val newQuantityValue: TextField,
-                              private val okButton: Button,
-                              private val cancelButton: Button){
+class EditQuantityDialogController(private val newQuantityValue: TextField,
+                                   private val okButton: Button,
+                                   private val cancelButton: Button){
 
   var dialogStage: Stage = _
   var resultCallback: Int => Unit = _
