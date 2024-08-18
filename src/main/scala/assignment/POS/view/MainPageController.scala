@@ -4,7 +4,7 @@ import assignment.POS.model.{ShoppingCart,Accessory, ClothingItem, ClothingItemM
 import scalafx.beans.property.{ObjectProperty, StringProperty}
 import scalafx.collections.ObservableBuffer
 import scalafx.event.ActionEvent
-import scalafx.scene.control.{Button, Label, TableColumn, TableView}
+import scalafx.scene.control.{Button, Label, TableColumn, TableView,TabPane}
 import scalafx.scene.image.{Image, ImageView}
 import scalafxml.core.macros.sfxml
 import scalafx.Includes._
@@ -27,6 +27,7 @@ class MainPageController (private val sizeCalculatorButton: Button,
                           private val priceValue: Label,
                           private val sizeValue: Label,
                           private val materialValue: Label,
+                          private val tabPane: TabPane
                          ) {
 
   // Initialize the tables with data from MainApp
@@ -50,6 +51,10 @@ class MainPageController (private val sizeCalculatorButton: Button,
   accessoryIDColumn.cellValueFactory = { cellData =>
     StringProperty(cellData.value.id) // Directly use id without .value
   }
+
+  //Variables to store selected items
+  private var selectedDress: Option[Dress] = None
+  private var selectedAccessory: Option[Accessory] = None
 
   // Show details of the selected item
   private def showItemDetails(item: Option[ClothingItem]): Unit = {
@@ -84,53 +89,63 @@ class MainPageController (private val sizeCalculatorButton: Button,
   }
 
   // Set up listeners for table selections
-  dressTable.selectionModel().selectedItemProperty().addListener { (_, _, selectedItem) =>
-    showItemDetails(Option(selectedItem))
+  dressTable.selectionModel().selectedItem.onChange { (_, _, newValue) =>
+    selectedDress = Option(newValue)
+    selectedAccessory = None
+    showItemDetails(selectedDress)
   }
 
-  accessoryTable.selectionModel().selectedItemProperty().addListener { (_, _, selectedItem) =>
-    showItemDetails(Option(selectedItem))
+  accessoryTable.selectionModel().selectedItem.onChange { (_, _, newValue) =>
+    selectedAccessory = Option(newValue)
+    selectedDress = None
+    showItemDetails(selectedAccessory)
   }
 
-
-  //add to cart
-  def handleAddToCart(action: ActionEvent): Unit = {
-    val selectedDress = dressTable.selectionModel().selectedItem.value
-    val selectedAccessory = accessoryTable.selectionModel().selectedItem.value
-
-    // Clear selection in both tables
-    dressTable.selectionModel().clearSelection()
-    accessoryTable.selectionModel().clearSelection()
-
-    if (selectedDress != null) {
-      ShoppingCart.instance.addItem(selectedDress)
-      println(s"Added selected dress to cart: ${selectedDress.name}")
-      // Show a confirmation message for successfully adding a dress
-      val alert = new Alert(AlertType.Information) {
-        title = "Item Added"
-        headerText = "Success"
-        contentText = s"Added selected dress to cart: ${selectedDress.name}"
-      }
-      alert.showAndWait()
-    } else if (selectedAccessory != null) {
-      ShoppingCart.instance.addItem(selectedAccessory)
-      println(s"Added selected accessory to cart: ${selectedAccessory.name}")
-      // Show a confirmation message for successfully adding an accessory
-      val alert = new Alert(AlertType.Information) {
-        title = "Item Added"
-        headerText = "Success"
-        contentText = s"Added selected accessory to cart: ${selectedAccessory.name}"
-      }
-      alert.showAndWait()
+  // Add a listener to the tab selection
+  tabPane.selectionModel().selectedItem.onChange { (_, _, newTab) =>
+    if (newTab.getText == "Dresses") {
+      accessoryTable.selectionModel().clearSelection()
+      selectedAccessory = None
     } else {
-      println("No item selected or multiple items selected")
-      // Show an error message if no item is selected
-      val alert = new Alert(AlertType.Error) {
-        title = "Selection Error"
-        headerText = "Please select an item."
-        contentText = "No item selected or multiple items selected."
-      }
-      alert.showAndWait()
+      dressTable.selectionModel().clearSelection()
+      selectedDress = None
+    }
+    showItemDetails(None)
+  }
+
+  // Add to cart
+  def handleAddToCart(action: ActionEvent): Unit = {
+    val itemToAdd: Option[Sellable] = selectedDress.orElse(selectedAccessory)
+
+    itemToAdd match {
+      case Some(item) =>
+        ShoppingCart.instance.addItem(item)
+        println(s"Added selected item to cart: ${item.name}")
+
+        // Show a confirmation message
+        val alert = new Alert(AlertType.Information) {
+          title = "Item Added"
+          headerText = "Success"
+          contentText = s"Added selected item to cart: ${item.name}"
+        }
+        alert.showAndWait()
+
+        // Clear selections
+        dressTable.selectionModel().clearSelection()
+        accessoryTable.selectionModel().clearSelection()
+        selectedDress = None
+        selectedAccessory = None
+        showItemDetails(None)
+
+      case None =>
+        println("No item selected")
+        // Show an error message if no item is selected
+        val alert = new Alert(AlertType.Error) {
+          title = "Selection Error"
+          headerText = "Please select an item."
+          contentText = "No item selected."
+        }
+        alert.showAndWait()
     }
 
     // Print the cart contents to the console
