@@ -53,6 +53,7 @@ class CartPageController(private val cartTable: TableView[CartItem[_ <: Sellable
 
     // Disable the clear cart button if the cart is empty
     clearCartButton.disable = ShoppingCart.instance.items.isEmpty
+    checkOutButton.disable = ShoppingCart.instance.items.isEmpty
   }
 
 
