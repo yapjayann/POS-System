@@ -1,7 +1,6 @@
 package assignment.POS.util
 
-import assignment.POS.model.{Accessory, CartItem, ClothingItem, Dress, Sellable}
-import scalafx.collections.ObservableBuffer
+import assignment.POS.model.{Accessory, CartItem, Dress, Sellable}
 import scalikejdbc._
 
 trait CartDatabase {
