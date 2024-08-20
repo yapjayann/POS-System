@@ -22,7 +22,7 @@ class CheckoutPageDialogController(private val totalAmount: Label,
   private var originalTotal: Double = 0.0 // Variable to store the original total amount before applying any vouchers
 
   // Initialize the voucher choice box with available vouchers and set up a listener for voucher selection
-  def initialize(): Unit = {
+  private def initialize(): Unit = {
     voucherChoice.items = ObservableBuffer(checkout.vouchers.map(_.name))
     voucherChoice.selectionModel().selectFirst() // Select the first voucher by default
 
@@ -63,7 +63,7 @@ class CheckoutPageDialogController(private val totalAmount: Label,
         }.showAndWait()
       } else { // If payment is sufficient
         val change = checkout.calculateChange(finalTotal, paid) // Calculate the change
-        new Alert(AlertType.Confirmation) {
+        new Alert(AlertType.Information) {
           title = "Payment Successful"
           headerText = "You have successfully checked out"
           contentText = f"Change: $$$change%.2f"

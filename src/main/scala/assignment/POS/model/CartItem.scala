@@ -9,7 +9,7 @@ case class CartItem[T <: Sellable](item: T, quantity: Int) {
   }
 
   // Calculates the total price for this cart item
-  def totalPrice: Double = item.price * quantity
+  def totalPrice(): Double = item.price * quantity
 }
 
 

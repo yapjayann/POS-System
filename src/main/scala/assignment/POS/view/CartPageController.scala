@@ -127,7 +127,7 @@ class CartPageController(private val cartTable: TableView[CartItem[_ <: Sellable
       // Clear the cart and update the UI if checkout was successful
       cartTable.items().clear()
       updateUI()
-      val alert = new Alert(AlertType.Confirmation) {
+      val alert = new Alert(AlertType.Information) {
         title = "Payment Successful"
         headerText = "You have successfully checked out."
         contentText = "Thank you for your purchase."

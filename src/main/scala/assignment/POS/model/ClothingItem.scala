@@ -1,6 +1,5 @@
 package assignment.POS.model
 
-import scalafx.collections.ObservableBuffer
 
 // Abstract class representing a clothing item
 abstract class ClothingItem(val id: String, val name: String, val price: Double, val imagePath: String) extends Sellable {
