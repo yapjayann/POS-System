@@ -25,7 +25,10 @@
                <font>
                   <Font name="Arial Rounded MT Bold" size="13.0" />
                </font></Text>
-                <TextField fx:id="newQuantityValue" prefHeight="90.0" prefWidth="242.0" style="-fx-background-radius: 15; -fx-cursor: text;" GridPane.rowIndex="1" />
+                <TextField fx:id="newQuantityValue" prefHeight="90.0" prefWidth="242.0" style="-fx-background-radius: 15; -fx-cursor: text;" GridPane.rowIndex="1">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="12.0" />
+               </font></TextField>
             </children>
         </GridPane>
         <ButtonBar layoutX="406.0" layoutY="353.0" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0">
