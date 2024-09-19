@@ -41,6 +41,7 @@ object MainApp extends JFXApp with CartDatabase {
       root = roots // Set the root layout as the main scene
     }
   }
+
   // Save cart items when closing the app
   stage.onCloseRequest = event => {
     saveCartItems(ShoppingCart.instance.items) // Save current cart items to the database
