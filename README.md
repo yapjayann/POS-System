@@ -1,8 +1,8 @@
 ## Project Description  
-The project is a Point-of-Sale (POS) system which is designed to simulate a user-friendly shopping experience for clothing items  
-in a virtual clothing store environment. The main purpose of the system is to offer users an interactive and enjoyable experience  
-with shopping by allowing them to browse through clothing items organized by type, add them to cart, manage their cart items and  
-proceed to a convenient checkout process. As the application’s UI and concept is heavily inspired by the popular game “Animal Crossing”,  
+The project is a Point-of-Sale (POS) system which is designed to simulate a user-friendly shopping experience for clothing items
+in a virtual clothing store environment. The main purpose of the system is to offer users an interactive and enjoyable experience
+with shopping by allowing them to browse through clothing items organized by type, add them to cart, manage their cart items and
+proceed to a convenient checkout process. As the application’s UI and concept is heavily inspired by the popular game “Animal Crossing”,
 the app incorporates playful design elements and background music to create a fun and immersive environment. Overall, this POS system combines the practical shopping functionalities with a whimsical theme to enhance the user enjoyment.  
 
 ## Key Functionalities
